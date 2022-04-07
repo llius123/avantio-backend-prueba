@@ -1,0 +1,9 @@
+version: "3" #This denotes that we are using version 3 of Docker Compose
+services: #This section defines all the different containers we will create.
+  avantio-back-node: #This is the name of our Nextjs application.
+    image: node:alpine
+    working_dir: "/src"
+    volumes:
+      - .:/src
+    ports:
+      - 3000:3000

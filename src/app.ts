@@ -3,13 +3,12 @@ import { Application, Request, Response } from "express";
 
 // Create Express server
 const app = express();
+const port = 3000;
 
 // Express configuration
-app.set("port", process.env.PORT || 3000);
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-app.get("/api", (req: Request, res: Response) => {
-  return res.status(200).send({ msg: "hola" });
+app.get("/", (req: Request, res: Response) => {
+  return res.status(200).send({ msg: "Hello world" });
 });
-
-export default app;
+app.listen(port, () => {
+  console.log(`Example app listening on port ${port}`);
+});
