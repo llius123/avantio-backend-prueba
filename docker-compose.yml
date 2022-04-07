@@ -7,3 +7,18 @@ services: #This section defines all the different containers we will create.
       - .:/src
     ports:
       - 3000:3000
+    command: npm run dev
+    depends_on:
+      - database
+  database:
+    image: "mongo"
+    environment:
+      - MONGO_DATABASE=avantio-mongo-db
+      - MONGO_USERNAME=admin
+      - MONGO_PASSWORD=admin
+    volumes:
+      - mongodb:/data/db
+    ports:
+      - 27017:27017
+volumes:
+  mongodb:

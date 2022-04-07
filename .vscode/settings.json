@@ -1,5 +1,3 @@
 {
-    "conventionalCommits.scopes": [
-        "Configurate project"
-    ]
+  "conventionalCommits.scopes": ["Configurate project", "1-1"]
 }

@@ -1,6 +1,6 @@
-☐ Configurate docker
+☐ 1-Configurate docker
     ✔ Configurate docker node @started(22-04-07 16:43) @done(22-04-07 18:49) @lasted(2h6m53s)
     Leccion aprendida -> Si tengo una api dockerizada cuando levante el docker-compose tiene que tener el comando --service-ports 
     y los puertos mapeados en la config si no, no es posible acceder a la api desde fuera del cotenedor
         ✔ Añadido Makefile para los usuarios de linux @done(22-04-07 18:50)
-    ☐ Configurate docker mongo
+    ☐ 1-Configurate docker mongo
