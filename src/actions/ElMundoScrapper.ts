@@ -1,5 +1,7 @@
 import rp from "request-promise";
 import $ from "cheerio";
+import { v4 as uuidv4 } from "uuid";
+import { ElMundo } from "../domain/ElMundo";
 
 export class ElMundoScrapper {
   constructor() {}
@@ -14,25 +16,48 @@ export class ElMundoScrapper {
       .catch(function (err) {
         //handle error
       });
-    this.loopATagHtmlElements(aHtmlTags);
+    const elMundoData: ElMundo[] = this.loopATagHtmlElements(aHtmlTags);
+    const elMundoDataFilteredByTitle = this.filterNewsByValidTitle(elMundoData);
+    const elMundoDataRemovedDuplicated = this.removeDuplicateNews(
+      elMundoDataFilteredByTitle
+    );
   }
 
-  private loopATagHtmlElements(element: any) {
+  private removeDuplicateNews(elMundoData: ElMundo[]): ElMundo[] {
+    return [
+      ...new Map(elMundoData.map((item) => [item["url"], item])).values(),
+    ];
+  }
+
+  private filterNewsByValidTitle(elMundoData: ElMundo[]): ElMundo[] {
+    return elMundoData.map((simpleNew) => {
+      if (!+simpleNew.getTitle()) {
+        return simpleNew;
+      }
+      return [];
+    }) as ElMundo[];
+  }
+
+  private loopATagHtmlElements(element: any): ElMundo[] {
+    const elMundoData: ElMundo[] = [];
     for (const link of element) {
       const url = link.attribs.href;
       const dateFormatted = this.getDateFormatted();
 
-      if (
-        url.includes(dateFormatted) &&
-        url ===
-          "https://www.elmundo.es/internacional/2022/04/08/624ffad9fc6c8312168b45bf.html"
-      ) {
-        console.log(this.getTitleFromLink(link));
+      if (url.includes(dateFormatted)) {
+        const id = uuidv4();
+        const title = this.getTitleFromLink(link);
+        elMundoData.push(new ElMundo(id, title, url));
       }
     }
+    return elMundoData;
   }
 
   private getTitleFromLink(linkTagHtml: Element): string {
+    if (linkTagHtml.children[0].children === undefined) {
+      return "";
+    }
+
     const firstChildren: any = linkTagHtml.children[0].children[0];
     return firstChildren.data;
   }

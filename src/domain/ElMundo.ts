@@ -8,4 +8,16 @@ export class ElMundo {
     this.title = title;
     this.url = url;
   }
+
+  public getId(): string {
+    return this.id;
+  }
+
+  public getTitle(): string {
+    return this.title;
+  }
+
+  public getUrl(): string {
+    return this.url;
+  }
 }
