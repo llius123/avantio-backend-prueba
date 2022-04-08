@@ -1,7 +1,17 @@
-☐ 1-Configurate docker
+✔ 1-Configurate docker @done(22-04-08 10:17)
     ✔ Configurate docker node @started(22-04-07 16:43) @done(22-04-07 18:49) @lasted(2h6m53s)
         ✔ Añadido Makefile para los usuarios de linux @done(22-04-07 18:50)
     ✔ 1-Configurate docker mongo @done(22-04-07 19:10)
     ✔ 2-Connect api with mongo @done(22-04-08 10:13)
         ✔ Install TypeORM @started(22-04-07 19:11) @done(22-04-07 21:27) @lasted(2h16m27s)
         ✔ Configure TypeORM with database @done(22-04-08 10:09)
+☐ 2-Crear un servicio de scrapping
+    ☐ 1-Configurar las librerias necesarias @started(22-04-08 11:33)
+    ☐ Crear el servicio de scraping
+        ☐ Scrapear los siguientes periodicos
+            ☐ El mundo
+            ☐ El pais
+        ☐ Guardar datos en bbdd
+    ☐ Crear un endpoint para ejecutar el servicio de scrapping
+☐ Crear un CRUD para gestionar servicios del modelo Feed.
+☐ Poder añadir a mano noticias a traves de la api
