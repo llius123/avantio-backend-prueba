@@ -2,6 +2,7 @@ import express from "express";
 import { Request, Response } from "express";
 import "reflect-metadata";
 import { ElMundoScrapper } from "./actions/ElMundoScrapper";
+import { ElPaisScrapper } from "./actions/ElPaisScrapper";
 
 // Create Express server
 const app = express();
@@ -15,5 +16,5 @@ app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
 });
 
-const test = new ElMundoScrapper();
+const test = new ElPaisScrapper();
 test.run();

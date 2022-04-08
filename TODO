@@ -11,7 +11,7 @@
         ☐ 1-Scrapear los siguientes periodicos
             ✔ 1-El mundo @started(22-04-08 11:40) @done(22-04-08 12:25) @lasted(45m12s)
                 ✔ Obtener datos de el mundo @done(22-04-08 12:25)
-            ☐ El pais
+            ✔ 2-El pais @done(22-04-08 12:36)
         ☐ Guardar datos en bbdd
     ☐ Crear un endpoint para ejecutar el servicio de scrapping
 ☐ Crear un CRUD para gestionar servicios del modelo Feed.
