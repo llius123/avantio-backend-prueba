@@ -1,6 +1,7 @@
 import express from "express";
 import { Request, Response } from "express";
 import "reflect-metadata";
+import { Test } from "./test/Test";
 
 // Create Express server
 const app = express();
@@ -13,3 +14,6 @@ app.get("/", (req: Request, res: Response) => {
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
 });
+
+const test = new Test();
+test.run();

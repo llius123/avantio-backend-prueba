@@ -6,10 +6,10 @@
         ✔ Install TypeORM @started(22-04-07 19:11) @done(22-04-07 21:27) @lasted(2h16m27s)
         ✔ Configure TypeORM with database @done(22-04-08 10:09)
 ☐ 2-Crear un servicio de scrapping
-    ☐ 1-Configurar las librerias necesarias @started(22-04-08 11:33)
-    ☐ Crear el servicio de scraping
-        ☐ Scrapear los siguientes periodicos
-            ☐ El mundo
+    ✔ 1-Configurar las librerias necesarias @started(22-04-08 11:33) @done(22-04-08 11:40) @lasted(7m32s)
+    ☐ 2-Crear el servicio de scraping
+        ☐ 1-Scrapear los siguientes periodicos
+            ☐ 1-El mundo @started(22-04-08 11:40)
             ☐ El pais
         ☐ Guardar datos en bbdd
     ☐ Crear un endpoint para ejecutar el servicio de scrapping
