@@ -1,20 +1,24 @@
-✔ 1-Configurate docker @done(22-04-08 10:17)
-    ✔ Configurate docker node @started(22-04-07 16:43) @done(22-04-07 18:49) @lasted(2h6m53s)
-        ✔ Añadido Makefile para los usuarios de linux @done(22-04-07 18:50)
-    ✔ 1-Configurate docker mongo @done(22-04-07 19:10)
-    ✔ 2-Connect api with mongo @done(22-04-08 10:13)
-        ✔ Install TypeORM @started(22-04-07 19:11) @done(22-04-07 21:27) @lasted(2h16m27s)
-        ✔ Configure TypeORM with database @done(22-04-08 10:09)
-☐ 2-Crear un servicio de scrapping
-    ✔ 1-Configurar las librerias necesarias @started(22-04-08 11:33) @done(22-04-08 11:40) @lasted(7m32s)
-    ☐ 2-Crear el servicio de scraping
-        ✔ 1-Scrapear los siguientes periodicos @done(22-04-08 12:37)
-            ✔ 1-El mundo @started(22-04-08 11:40) @done(22-04-08 12:25) @lasted(45m12s)
-                ✔ Obtener datos de el mundo @done(22-04-08 12:25)
-            ✔ 2-El pais @done(22-04-08 12:36)
-        ☐ 2-Guardar datos en bbdd
-            ✔ 1-Crear objeto de dominio @started(22-04-08 12:38) @done(22-04-08 12:43) @lasted(5m23s)
-            ☐ 2-Crear mappers entre objetos de dominio y objetos de bbdd
-    ☐ Crear un endpoint para ejecutar el servicio de scrapping
-☐ Crear un CRUD para gestionar servicios del modelo Feed.
-☐ Poder añadir a mano noticias a traves de la api
+TODO:
+    ✔ 1-Configurate docker @done(22-04-08 10:17)
+        ✔ Configurate docker node @started(22-04-07 16:43) @done(22-04-07 18:49) @lasted(2h6m53s)
+            ✔ Añadido Makefile para los usuarios de linux @done(22-04-07 18:50)
+        ✔ 1-Configurate docker mongo @done(22-04-07 19:10)
+        ✔ 2-Connect api with mongo @done(22-04-08 10:13)
+            ✔ Install TypeORM @started(22-04-07 19:11) @done(22-04-07 21:27) @lasted(2h16m27s)
+            ✔ Configure TypeORM with database @done(22-04-08 10:09)
+    ☐ 2-Crear un servicio de scrapping
+        ✔ 1-Configurar las librerias necesarias @started(22-04-08 11:33) @done(22-04-08 11:40) @lasted(7m32s)
+        ☐ 2-Crear el servicio de scraping
+            ✔ 1-Scrapear los siguientes periodicos @done(22-04-08 12:37)
+                ✔ 1-El mundo @started(22-04-08 11:40) @done(22-04-08 12:25) @lasted(45m12s)
+                    ✔ Obtener datos de el mundo @done(22-04-08 12:25)
+                ✔ 2-El pais @done(22-04-08 12:36)
+            ☐ 2-Guardar datos en bbdd
+                ✔ 1-Crear objeto de dominio @started(22-04-08 12:38) @done(22-04-08 12:43) @lasted(5m23s)
+                ☐ 2-Crear mappers entre objetos de dominio y objetos de bbdd
+        ☐ Crear un endpoint para ejecutar el servicio de scrapping
+    ☐ Crear un CRUD para gestionar servicios del modelo Feed.
+    ☐ Poder añadir a mano noticias a traves de la api
+
+Deuda tecnica:
+    ☐ Refactorizar todos los uuid y crear una capa de abstraccion encima de esta libreria
