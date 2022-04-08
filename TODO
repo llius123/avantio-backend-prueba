@@ -9,7 +9,8 @@
     ✔ 1-Configurar las librerias necesarias @started(22-04-08 11:33) @done(22-04-08 11:40) @lasted(7m32s)
     ☐ 2-Crear el servicio de scraping
         ☐ 1-Scrapear los siguientes periodicos
-            ☐ 1-El mundo @started(22-04-08 11:40)
+            ✔ 1-El mundo @started(22-04-08 11:40) @done(22-04-08 12:25) @lasted(45m12s)
+                ✔ Obtener datos de el mundo @done(22-04-08 12:25)
             ☐ El pais
         ☐ Guardar datos en bbdd
     ☐ Crear un endpoint para ejecutar el servicio de scrapping
