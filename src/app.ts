@@ -1,5 +1,6 @@
 import express from "express";
-import { Application, Request, Response } from "express";
+import { Request, Response } from "express";
+import "reflect-metadata";
 
 // Create Express server
 const app = express();

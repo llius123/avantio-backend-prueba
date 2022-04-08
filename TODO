@@ -1,6 +1,7 @@
 ☐ 1-Configurate docker
     ✔ Configurate docker node @started(22-04-07 16:43) @done(22-04-07 18:49) @lasted(2h6m53s)
-    Leccion aprendida -> Si tengo una api dockerizada cuando levante el docker-compose tiene que tener el comando --service-ports 
-    y los puertos mapeados en la config si no, no es posible acceder a la api desde fuera del cotenedor
         ✔ Añadido Makefile para los usuarios de linux @done(22-04-07 18:50)
-    ☐ 1-Configurate docker mongo
+    ✔ 1-Configurate docker mongo @done(22-04-07 19:10)
+    ✔ 2-Connect api with mongo @done(22-04-08 10:13)
+        ✔ Install TypeORM @started(22-04-07 19:11) @done(22-04-07 21:27) @lasted(2h16m27s)
+        ✔ Configure TypeORM with database @done(22-04-08 10:09)
