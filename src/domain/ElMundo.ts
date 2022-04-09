@@ -20,4 +20,14 @@ export class ElMundo {
   public getUrl(): string {
     return this.url;
   }
+
+  public isValid(): boolean {
+    return !this.hasEmptyParams();
+  }
+
+  private hasEmptyParams(): boolean {
+    return (
+      this.id.length === 0 || this.title.length === 0 || this.url.length === 0
+    );
+  }
 }

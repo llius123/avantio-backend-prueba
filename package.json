@@ -38,13 +38,13 @@
   },
   "dependencies": {
     "express": "^4.17.2",
-    "typeorm": "0.3.5",
     "reflect-metadata": "0.1.13",
     "mongodb": "3.6.0",
     "request": "2.88.2",
     "request-promise": "4.2.6",
     "cheerio": "1.0.0-rc.10",
     "puppeteer": "13.5.2",
-    "uuid": "8.3.2"
+    "uuid": "8.3.2",
+    "mongoose": "6.2.10"
   }
 }

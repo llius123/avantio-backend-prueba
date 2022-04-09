@@ -1,18 +1,13 @@
-import { Column, Entity, ObjectID, ObjectIdColumn } from "typeorm";
-
-@Entity()
+import { Schema, model, connect } from "mongoose";
+import { ElMundoDTO } from "../dto/ElMundoDTO";
+import mongoose from "mongoose";
 export class ElMundoMongoDB {
-  @ObjectIdColumn()
-  id: string;
-
-  @Column()
+  id: mongoose.Types.ObjectId;
   title: string;
-
-  @Column()
   url: string;
 
   constructor(id: string, title: string, url: string) {
-    this.id = id;
+    this.id = new mongoose.Types.ObjectId(id);
     this.title = title;
     this.url = url;
   }

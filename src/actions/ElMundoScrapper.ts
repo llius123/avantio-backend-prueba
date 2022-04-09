@@ -2,9 +2,15 @@ import rp from "request-promise";
 import $ from "cheerio";
 import { v4 as uuidv4 } from "uuid";
 import { ElMundo } from "../domain/ElMundo";
+import { ElMundoRepository } from "../repository/ElMundoRepository";
+import { mapElMundoDomainToElMundoRepo } from "../map/mapElMundoDomainAndElMundoRepo";
+import mongoose from "mongoose";
 
 export class ElMundoScrapper {
-  constructor() {}
+  private repo: ElMundoRepository;
+  constructor(elMundoRepo: ElMundoRepository) {
+    this.repo = elMundoRepo;
+  }
 
   public async run() {
     const url = "https://www.elmundo.es/";
@@ -21,21 +27,30 @@ export class ElMundoScrapper {
     const elMundoDataRemovedDuplicated = this.removeDuplicateNews(
       elMundoDataFilteredByTitle
     );
+    for (let index = 0; index < elMundoDataRemovedDuplicated.length; index++) {
+      await this.repo.save(
+        mapElMundoDomainToElMundoRepo(elMundoDataRemovedDuplicated[index])
+      );
+    }
   }
 
   private removeDuplicateNews(elMundoData: ElMundo[]): ElMundo[] {
     return [
-      ...new Map(elMundoData.map((item) => [item["url"], item])).values(),
+      ...new Map(elMundoData.map((item) => [item["title"], item])).values(),
     ];
   }
 
   private filterNewsByValidTitle(elMundoData: ElMundo[]): ElMundo[] {
-    return elMundoData.map((simpleNew) => {
-      if (!+simpleNew.getTitle()) {
-        return simpleNew;
+    const result: ElMundo[] = [];
+    elMundoData.forEach((simpleNew) => {
+      if (!simpleNew.isValid()) {
+        return;
       }
-      return [];
-    }) as ElMundo[];
+      if (!+simpleNew.getTitle()) {
+        result.push(simpleNew);
+      }
+    });
+    return result;
   }
 
   private loopATagHtmlElements(element: any): ElMundo[] {
@@ -45,9 +60,9 @@ export class ElMundoScrapper {
       const dateFormatted = this.getDateFormatted();
 
       if (url.includes(dateFormatted)) {
-        const id = uuidv4();
+        const id = new mongoose.Types.ObjectId();
         const title = this.getTitleFromLink(link);
-        elMundoData.push(new ElMundo(id, title, url));
+        elMundoData.push(new ElMundo(id._id.toString(), title, url));
       }
     }
     return elMundoData;

@@ -15,10 +15,12 @@ TODO:
                 ✔ 2-El pais @done(22-04-08 12:36)
             ☐ 2-Guardar datos en bbdd
                 ✔ 1-Crear objeto de dominio @started(22-04-08 12:38) @done(22-04-08 12:43) @lasted(5m23s)
-                ☐ 2-Crear mappers entre objetos de dominio y objetos de bbdd
+                ✔ 2-Crear mappers entre objetos de dominio y objetos de bbdd @done(22-04-08 13:35)
+                ☐ 3- Crear Repo para guardar ElMundo domain object que he creado en la accion @started(22-04-08 13:36)
         ☐ Crear un endpoint para ejecutar el servicio de scrapping
     ☐ Crear un CRUD para gestionar servicios del modelo Feed.
     ☐ Poder añadir a mano noticias a traves de la api
 
 Deuda tecnica:
     ☐ Refactorizar todos los uuid y crear una capa de abstraccion encima de esta libreria
+    ☐ removeDuplicateNews de ElMundo no me acaba de convencer, dar otra vuelta
