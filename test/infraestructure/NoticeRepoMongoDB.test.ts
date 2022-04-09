@@ -31,4 +31,28 @@ describe("Notice repo", () => {
     const notices = await elMundoRepository.getAll();
     expect(notices[0]).toEqual(notice);
   });
+
+  it(`
+    GIVEN I have 2 notices
+    WHEN i get all
+    THEN i get all
+  `, async () => {
+    const elMundoRepository = new ElMundoRepository();
+    const notice1 = new Notice(
+      new mongoose.Types.ObjectId()._id.toString(),
+      "title",
+      "url"
+    );
+    const notice2 = new Notice(
+      new mongoose.Types.ObjectId()._id.toString(),
+      "title2",
+      "url2"
+    );
+    // WHEN
+    await elMundoRepository.save(notice1);
+    await elMundoRepository.save(notice2);
+    // THEN
+    const notices = await elMundoRepository.getAll();
+    expect(notices).toEqual([notice1, notice2]);
+  });
 });
