@@ -6,7 +6,7 @@ services: #This section defines all the different containers we will create.
     volumes:
       - .:/src
     ports:
-      - 3000:3000
+      - 3000-3001
     command: npm run dev
     depends_on:
       - mongodb
