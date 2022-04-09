@@ -5,6 +5,8 @@ import { ElMundoScrapper } from "./actions/ElMundoScrapper";
 import { ElPaisScrapper } from "./actions/ElPaisScrapper";
 import { ElMundoRepository } from "./repository/ElMundoRepository";
 import { ScraperRequestPromise } from "./utils/ScraperRequestPromise";
+import mongoose from "mongoose";
+import { connection } from "./repository/MongoDBRepo";
 
 // Create Express server
 const app = express();
@@ -17,8 +19,12 @@ app.get("/", (req: Request, res: Response) => {
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
 });
-
-const repo = new ElMundoRepository();
-const scraper = new ScraperRequestPromise();
-const test = new ElMundoScrapper(repo, scraper);
-test.run();
+main();
+async function main() {
+  connection({ db: "mongodb://mongodb:27017/database" });
+  // await mongoose.connect("mongodb://mongodb:27017/database");
+  const repo = new ElMundoRepository();
+  const scraper = new ScraperRequestPromise();
+  const test = new ElMundoScrapper(repo, scraper);
+  test.run();
+}
