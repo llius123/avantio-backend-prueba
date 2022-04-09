@@ -34,3 +34,4 @@ TODO:
 Deuda tecnica:
     ☐ Refactorizar todos los uuid y crear una capa de abstraccion encima de esta libreria
     ☐ removeDuplicateNews de ElMundo no me acaba de convencer, dar otra vuelta
+    ☐ Intentar quitar los any de las acciones de ElMundo

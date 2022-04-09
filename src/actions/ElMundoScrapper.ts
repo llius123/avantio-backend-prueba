@@ -1,64 +1,76 @@
-import { v4 as uuidv4 } from "uuid";
 import { Notice } from "../domain/Notice";
 import { ElMundoRepository } from "../repository/ElMundoRepository";
-import { mapElMundoDomainToElMundoRepo } from "../map/mapElMundoDomainToElMundoRepo";
 import mongoose from "mongoose";
 import { Scraper } from "../utils/Scraper";
 
 export class ElMundoScrapper {
   private repo: ElMundoRepository;
   private scraper: Scraper;
+  private url = "https://www.elmundo.es/";
   constructor(elMundoRepo: ElMundoRepository, Scraper: Scraper) {
     this.repo = elMundoRepo;
     this.scraper = Scraper;
   }
 
   public async run() {
-    const url = "https://www.elmundo.es/";
-    const aHtmlTags = await this.scraper.run(url, "a");
+    const allLinkTagsFromElMundo = await this.scraper.run(this.url, "a");
 
-    const elMundoData: Notice[] = this.loopATagHtmlElements(aHtmlTags);
-    const elMundoDataFilteredByTitle = this.filterNewsByValidTitle(elMundoData);
-    const elMundoDataRemovedDuplicated = this.removeDuplicateNews(
-      elMundoDataFilteredByTitle
+    const elMundoData: Notice[] = this.transformLinkTagsToDomainObject(
+      allLinkTagsFromElMundo
     );
-    for (let index = 0; index < elMundoDataRemovedDuplicated.length; index++) {
-      await this.repo.save(elMundoDataRemovedDuplicated[index]);
+
+    const elMundoDataWithValidTitles =
+      this.filterNoticesByValidTitle(elMundoData);
+
+    const elMundoDataWithoutDuplicateNotices = this.removeDuplicateNews(
+      elMundoDataWithValidTitles
+    );
+
+    for (
+      let index = 0;
+      index < elMundoDataWithoutDuplicateNotices.length;
+      index++
+    ) {
+      await this.repo.save(elMundoDataWithoutDuplicateNotices[index]);
     }
   }
 
   private removeDuplicateNews(elMundoData: Notice[]): Notice[] {
     return [
-      ...new Map(elMundoData.map((item) => [item["title"], item])).values(),
+      ...new Map(elMundoData.map((item) => [item.getTitle(), item])).values(),
     ];
   }
 
-  private filterNewsByValidTitle(elMundoData: Notice[]): Notice[] {
+  private filterNoticesByValidTitle(allElMundoNotices: Notice[]): Notice[] {
     const result: Notice[] = [];
-    elMundoData.forEach((simpleNew) => {
-      if (!simpleNew.isValid()) {
+    allElMundoNotices.forEach((elMundoNotice) => {
+      if (!elMundoNotice.isValid()) {
         return;
       }
-      if (!+simpleNew.getTitle()) {
-        result.push(simpleNew);
+      if (!+elMundoNotice.getTitle()) {
+        result.push(elMundoNotice);
       }
     });
     return result;
   }
 
-  private loopATagHtmlElements(element: any): Notice[] {
-    const elMundoData: Notice[] = [];
-    for (const link of element) {
-      const url = link.attribs.href;
+  private transformLinkTagsToDomainObject(
+    htmlLinkTagsElements: any[]
+  ): Notice[] {
+    const elMundoDomainData: Notice[] = [];
+    for (const htmlLinkTagElement of htmlLinkTagsElements) {
+      const urlLinkTag = htmlLinkTagElement.attribs.href;
       const dateFormatted = this.getDateFormatted();
 
-      if (url.includes(dateFormatted)) {
+      if (urlLinkTag.includes(dateFormatted)) {
         const id = new mongoose.Types.ObjectId();
-        const title = this.getTitleFromLink(link);
-        elMundoData.push(new Notice(id._id.toString(), title, url));
+        const title = this.getTitleFromLink(htmlLinkTagElement);
+        elMundoDomainData.push(
+          new Notice(id._id.toString(), title, urlLinkTag)
+        );
       }
     }
-    return elMundoData;
+    return elMundoDomainData;
   }
 
   private getTitleFromLink(linkTagHtml: Element): string {

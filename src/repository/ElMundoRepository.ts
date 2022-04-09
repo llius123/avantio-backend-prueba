@@ -18,7 +18,7 @@ export class ElMundoRepository implements NoticeRepository {
 
   async save(elMundo: Notice): Promise<void> {
     await mongoose.connect("mongodb://mongodb:27017/database");
-    mongoose.set("debug", true);
+    // mongoose.set("debug", true);
     await new ElMundoModel(mapElMundoDomainToElMundoRepo(elMundo)).save();
     await mongoose.connection.close();
   }
