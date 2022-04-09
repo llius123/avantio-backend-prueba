@@ -1,7 +1,7 @@
 import { v4 as uuidv4 } from "uuid";
-import { ElMundo } from "../domain/ElMundo";
+import { Notice } from "../domain/Notice";
 import { ElMundoRepository } from "../repository/ElMundoRepository";
-import { mapElMundoDomainToElMundoRepo } from "../map/mapElMundoDomainAndElMundoRepo";
+import { mapElMundoDomainToElMundoRepo } from "../map/mapElMundoDomainToElMundoRepo";
 import mongoose from "mongoose";
 import { Scraper } from "../utils/Scraper";
 
@@ -17,26 +17,24 @@ export class ElMundoScrapper {
     const url = "https://www.elmundo.es/";
     const aHtmlTags = await this.scraper.run(url, "a");
 
-    const elMundoData: ElMundo[] = this.loopATagHtmlElements(aHtmlTags);
+    const elMundoData: Notice[] = this.loopATagHtmlElements(aHtmlTags);
     const elMundoDataFilteredByTitle = this.filterNewsByValidTitle(elMundoData);
     const elMundoDataRemovedDuplicated = this.removeDuplicateNews(
       elMundoDataFilteredByTitle
     );
     for (let index = 0; index < elMundoDataRemovedDuplicated.length; index++) {
-      await this.repo.save(
-        mapElMundoDomainToElMundoRepo(elMundoDataRemovedDuplicated[index])
-      );
+      await this.repo.save(elMundoDataRemovedDuplicated[index]);
     }
   }
 
-  private removeDuplicateNews(elMundoData: ElMundo[]): ElMundo[] {
+  private removeDuplicateNews(elMundoData: Notice[]): Notice[] {
     return [
       ...new Map(elMundoData.map((item) => [item["title"], item])).values(),
     ];
   }
 
-  private filterNewsByValidTitle(elMundoData: ElMundo[]): ElMundo[] {
-    const result: ElMundo[] = [];
+  private filterNewsByValidTitle(elMundoData: Notice[]): Notice[] {
+    const result: Notice[] = [];
     elMundoData.forEach((simpleNew) => {
       if (!simpleNew.isValid()) {
         return;
@@ -48,8 +46,8 @@ export class ElMundoScrapper {
     return result;
   }
 
-  private loopATagHtmlElements(element: any): ElMundo[] {
-    const elMundoData: ElMundo[] = [];
+  private loopATagHtmlElements(element: any): Notice[] {
+    const elMundoData: Notice[] = [];
     for (const link of element) {
       const url = link.attribs.href;
       const dateFormatted = this.getDateFormatted();
@@ -57,7 +55,7 @@ export class ElMundoScrapper {
       if (url.includes(dateFormatted)) {
         const id = new mongoose.Types.ObjectId();
         const title = this.getTitleFromLink(link);
-        elMundoData.push(new ElMundo(id._id.toString(), title, url));
+        elMundoData.push(new Notice(id._id.toString(), title, url));
       }
     }
     return elMundoData;

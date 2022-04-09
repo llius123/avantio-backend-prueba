@@ -1,28 +1,25 @@
 import { ElMundoMongoDB } from "../entity/ElMundoMongoDB";
-import { Schema, model, connect, ObjectId } from "mongoose";
+import { Schema, model } from "mongoose";
 import { ElMundoDTO } from "../dto/ElMundoDTO";
 import mongoose from "mongoose";
+import { NoticeRepository } from "./NoticeRepository";
+import { Notice } from "../domain/Notice";
+import { mapElMundoDomainToElMundoRepo } from "../map/mapElMundoDomainToElMundoRepo";
 
 const elMundoSchema = new Schema<ElMundoDTO>({
   id: { type: String, required: true },
   title: { type: String, required: true },
   url: { type: String, required: true },
 });
+const ElMundoModel = model<ElMundoDTO>("ElMundo", elMundoSchema);
 
-export class ElMundoRepository {
-  private ElMundoModel = model<ElMundoDTO>("ElMundo", elMundoSchema);
-
+export class ElMundoRepository implements NoticeRepository {
   constructor() {}
 
-  async save(elMundo: ElMundoMongoDB): Promise<void> {
-    await connect("mongodb://mongodb:27017/database");
+  async save(elMundo: Notice): Promise<void> {
+    await mongoose.connect("mongodb://mongodb:27017/database");
     mongoose.set("debug", true);
-    const elMundoData = new this.ElMundoModel({
-      _id: elMundo.id,
-      id: elMundo.id,
-      title: elMundo.title,
-      url: elMundo.url,
-    });
-    await elMundoData.save();
+    await new ElMundoModel(mapElMundoDomainToElMundoRepo(elMundo)).save();
+    await mongoose.connection.close();
   }
 }

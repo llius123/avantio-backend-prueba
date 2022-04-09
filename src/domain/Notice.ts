@@ -1,4 +1,4 @@
-export class ElMundo {
+export class Notice {
   private id: string;
   private title: string;
   private url: string;

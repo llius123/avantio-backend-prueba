@@ -1,9 +1,7 @@
-import { ElMundo } from "../domain/ElMundo";
+import { Notice } from "../domain/Notice";
 import { ElMundoMongoDB } from "../entity/ElMundoMongoDB";
 
-export function mapElMundoDomainToElMundoRepo(
-  ElMundo: ElMundo
-): ElMundoMongoDB {
+export function mapElMundoDomainToElMundoRepo(ElMundo: Notice): ElMundoMongoDB {
   return new ElMundoMongoDB(
     ElMundo.getId(),
     ElMundo.getTitle(),
