@@ -19,7 +19,7 @@ TODO:
                 ✔ 3- Crear Repo para guardar ElMundo domain object que he creado en la accion @started(22-04-08 13:36) @done(22-04-09 19:19) @lasted(1d5h43m58s)
                 ☐ 4-Refactorizar el codigo
                     ☐ 1-Revisar estos archivos y refactorizarlos
-                        ☐ 1-ElMundoScrapper
+                        ✔ 1-ElMundoScrapper @started(22-04-09 19:27) @done(22-04-09 19:36) @lasted(9m2s)
                         ☐ 2-ElMundoRepository
                         ☐ 3-ElMundoMongoDB (hace falta una clase para esto? o puede ser una interfaz)
                     ☐ 2-No guardar datos si ya estan guardados en la bbdd

@@ -1,27 +1,22 @@
-import rp from "request-promise";
-import $ from "cheerio";
 import { v4 as uuidv4 } from "uuid";
 import { ElMundo } from "../domain/ElMundo";
 import { ElMundoRepository } from "../repository/ElMundoRepository";
 import { mapElMundoDomainToElMundoRepo } from "../map/mapElMundoDomainAndElMundoRepo";
 import mongoose from "mongoose";
+import { Scraper } from "../utils/Scraper";
 
 export class ElMundoScrapper {
   private repo: ElMundoRepository;
-  constructor(elMundoRepo: ElMundoRepository) {
+  private scraper: Scraper;
+  constructor(elMundoRepo: ElMundoRepository, Scraper: Scraper) {
     this.repo = elMundoRepo;
+    this.scraper = Scraper;
   }
 
   public async run() {
     const url = "https://www.elmundo.es/";
+    const aHtmlTags = await this.scraper.run(url, "a");
 
-    const aHtmlTags: any = await rp(url)
-      .then(function (html) {
-        return $("a", html);
-      })
-      .catch(function (err) {
-        //handle error
-      });
     const elMundoData: ElMundo[] = this.loopATagHtmlElements(aHtmlTags);
     const elMundoDataFilteredByTitle = this.filterNewsByValidTitle(elMundoData);
     const elMundoDataRemovedDuplicated = this.removeDuplicateNews(

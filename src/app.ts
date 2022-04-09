@@ -4,6 +4,7 @@ import "reflect-metadata";
 import { ElMundoScrapper } from "./actions/ElMundoScrapper";
 import { ElPaisScrapper } from "./actions/ElPaisScrapper";
 import { ElMundoRepository } from "./repository/ElMundoRepository";
+import { ScraperRequestPromise } from "./utils/ScraperRequestPromise";
 
 // Create Express server
 const app = express();
@@ -18,5 +19,6 @@ app.listen(port, () => {
 });
 
 const repo = new ElMundoRepository();
-const test = new ElMundoScrapper(repo);
+const scraper = new ScraperRequestPromise();
+const test = new ElMundoScrapper(repo, scraper);
 test.run();
