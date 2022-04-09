@@ -18,15 +18,16 @@ TODO:
                 ✔ 2-Crear mappers entre objetos de dominio y objetos de bbdd @done(22-04-08 13:35)
                 ✔ 3- Crear Repo para guardar ElMundo domain object que he creado en la accion @started(22-04-08 13:36) @done(22-04-09 19:19) @lasted(1d5h43m58s)
                 ☐ 4-Refactorizar el codigo
-                    ☐ 1-Revisar estos archivos y refactorizarlos
+                    ✔ 1-Revisar estos archivos y refactorizarlos @done(22-04-09 22:10)
                         ✔ 1-ElMundoScrapper @started(22-04-09 19:27) @done(22-04-09 19:36) @lasted(9m2s)
-                        ☐ 2-ElMundoRepository
-                        ☐ 3-ElMundoMongoDB (hace falta una clase para esto? o puede ser una interfaz)
-                    ☐ 2-No guardar datos si ya estan guardados en la bbdd
-                    ☐ 3-Revisar el filtrado de duplicados/objetos vacios
-                ☐ 5-Crear tests
-                    ☐ 1-Crear test unitario para la accion
-                    ☐ 2-Crear test infraestructura
+                        ✔ 2-ElMundoRepository @done(22-04-09 22:09)
+                        ✔ 3-ElMundoMongoDB (hace falta una clase para esto? o puede ser una interfaz) @done(22-04-09 22:09)
+                        Revisar el final a ver si durante el proceso obtiene mas contexto
+                    ☐ 2-Crear tests
+                        ☐ 1-Crear test unitario para la accion
+                        ☐ 2-Crear test infraestructura
+                    ☐ No guardar datos si ya estan guardados en la bbdd
+                    ☐ Revisar el filtrado de duplicados/objetos vacios
         ☐ Crear un endpoint para ejecutar el servicio de scrapping
     ☐ Crear un CRUD para gestionar servicios del modelo Feed.
     ☐ Poder añadir a mano noticias a traves de la api
@@ -35,3 +36,4 @@ Deuda tecnica:
     ☐ Refactorizar todos los uuid y crear una capa de abstraccion encima de esta libreria
     ☐ removeDuplicateNews de ElMundo no me acaba de convencer, dar otra vuelta
     ☐ Intentar quitar los any de las acciones de ElMundo
+    ☐ Revisar ElMundoMongoDB a ver si tiene sentido que sea una clase
