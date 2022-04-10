@@ -1,5 +1,5 @@
 import { Schema, model, connect } from "mongoose";
-import { ElMundoDTO } from "../dto/ElMundoDTO";
+import { NoticeDTO } from "../dto/NoticeDTO";
 import mongoose from "mongoose";
 export class ElMundoMongoDB {
   id: mongoose.Types.ObjectId;

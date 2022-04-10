@@ -1,8 +1,8 @@
 import mongoose from "mongoose";
-import { ElMundoDTO } from "../dto/ElMundoDTO";
+import { NoticeDTO } from "../dto/NoticeDTO";
 import { Schema } from "mongoose";
 
-const noticeSchema = new Schema<ElMundoDTO>({
+const noticeSchema = new Schema<NoticeDTO>({
   id: { type: String, required: true },
   title: { type: String, required: true },
   url: { type: String, required: true },
@@ -28,7 +28,7 @@ export function connection({ db }: TInput) {
   mongoose.connection.on("disconnected", connect);
 }
 
-export const noticeMongoSchema = mongoose.model<ElMundoDTO>(
+export const noticeMongoSchema = mongoose.model<NoticeDTO>(
   "notice",
   noticeSchema
 );
