@@ -3,6 +3,7 @@ import { NoticeMongoRepository } from "../repository/NoticeMongoRepository";
 import mongoose from "mongoose";
 import { Scraper } from "../utils/Scraper";
 import { IdGenerator } from "../utils/IdGenerator";
+import { ScrapedData } from "../utils/ScraperRequestPromiseV2";
 
 export class ElMundoScrapper {
   private repo: NoticeMongoRepository;
@@ -20,26 +21,56 @@ export class ElMundoScrapper {
   }
 
   public async run() {
-    const allLinkTagsFromElMundo = await this.scraper.run(this.url, "a");
+    const allLinks: ScrapedData[] = await this.scraper.run(this.url, "a");
 
-    const elMundoData: Notice[] = this.transformLinkTagsToDomainObject(
-      allLinkTagsFromElMundo
+    const allLinksFiltered: ScrapedData[] = this.removeBadLinks(allLinks);
+    const allLinksFilteredByDate: ScrapedData[] =
+      this.getLinksByDate(allLinksFiltered);
+    const allLinksWithoutDuplicates: ScrapedData[] = this.removeDuplicateLinks(
+      allLinksFilteredByDate
     );
-
-    const elMundoDataWithValidTitles =
-      this.filterNoticesByValidTitle(elMundoData);
-
-    const elMundoDataWithoutDuplicateNotices = this.removeDuplicateNews(
-      elMundoDataWithValidTitles
+    const allLinksWithoutComments: ScrapedData[] = this.removeCommentsLinks(
+      allLinksWithoutDuplicates
     );
+    allLinksWithoutComments.forEach(async (link) => {
+      await this.saveNotice(
+        new Notice(this.idGenerator.run(), link.title, link.url)
+      );
+    });
+  }
 
-    for (
-      let index = 0;
-      index < elMundoDataWithoutDuplicateNotices.length;
-      index++
-    ) {
-      await this.saveNotice(elMundoDataWithoutDuplicateNotices[index]);
-    }
+  private removeCommentsLinks(allLinks: ScrapedData[]): ScrapedData[] {
+    const result: ScrapedData[] = [];
+    allLinks.forEach((link) => {
+      if (!link.url.includes("#ancla_comentarios")) {
+        result.push(link);
+      }
+    });
+    return result;
+  }
+
+  private removeDuplicateLinks(allLinks: ScrapedData[]): ScrapedData[] {
+    return [...new Map(allLinks.map((item) => [item.title, item])).values()];
+  }
+
+  private getLinksByDate(allLinks: ScrapedData[]): ScrapedData[] {
+    const result: ScrapedData[] = [];
+    allLinks.forEach((link) => {
+      if (link.url.includes(this.getDateFormatted())) {
+        result.push(link);
+      }
+    });
+    return result;
+  }
+
+  private removeBadLinks(allLinks: ScrapedData[]) {
+    const allLinksWithoutEmpty = allLinks.map((link) => {
+      if (link.title === "" || link.url === "") {
+        return;
+      }
+      return link;
+    });
+    return allLinksWithoutEmpty as ScrapedData[];
   }
 
   private async saveNotice(notice: Notice): Promise<void> {
@@ -49,51 +80,6 @@ export class ElMundoScrapper {
       return;
     }
     await this.repo.save(notice);
-  }
-
-  private removeDuplicateNews(elMundoData: Notice[]): Notice[] {
-    return [
-      ...new Map(elMundoData.map((item) => [item.getTitle(), item])).values(),
-    ];
-  }
-
-  private filterNoticesByValidTitle(allElMundoNotices: Notice[]): Notice[] {
-    const result: Notice[] = [];
-    allElMundoNotices.forEach((elMundoNotice) => {
-      if (!elMundoNotice.isValid()) {
-        return;
-      }
-      if (!+elMundoNotice.getTitle()) {
-        result.push(elMundoNotice);
-      }
-    });
-    return result;
-  }
-
-  private transformLinkTagsToDomainObject(
-    htmlLinkTagsElements: any[]
-  ): Notice[] {
-    const elMundoDomainData: Notice[] = [];
-    for (const htmlLinkTagElement of htmlLinkTagsElements) {
-      const urlLinkTag = htmlLinkTagElement.attribs.href;
-      const dateFormatted = this.getDateFormatted();
-
-      if (urlLinkTag.includes(dateFormatted)) {
-        const id = this.idGenerator.run();
-        const title = this.getTitleFromLink(htmlLinkTagElement);
-        elMundoDomainData.push(new Notice(id, title, urlLinkTag));
-      }
-    }
-    return elMundoDomainData;
-  }
-
-  private getTitleFromLink(linkTagHtml: Element): string {
-    if (linkTagHtml.children[0].children === undefined) {
-      return "";
-    }
-
-    const firstChildren: any = linkTagHtml.children[0].children[0];
-    return firstChildren.data;
   }
 
   private getDateFormatted(): string {

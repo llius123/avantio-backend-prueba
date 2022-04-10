@@ -2,7 +2,7 @@ import rp from "request-promise";
 import $ from "cheerio";
 import { Scraper } from "./Scraper";
 
-interface ScrapedData {
+export interface ScrapedData {
   title: string;
   url: string;
 }
@@ -26,5 +26,6 @@ export class ScraperRequestPromiseV2 implements Scraper {
         title: $(element).text(),
       });
     });
+    return result;
   }
 }

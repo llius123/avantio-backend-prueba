@@ -6,6 +6,7 @@ import { NoticeMongoRepository } from "./repository/NoticeMongoRepository";
 import { ScraperRequestPromise } from "./utils/ScraperRequestPromise";
 import { connection } from "./repository/MongoDBConnection";
 import { IdGeneratorMongoose } from "./utils/IdGeneratorMongoose";
+import { ScraperRequestPromiseV2 } from "./utils/ScraperRequestPromiseV2";
 
 // Create Express server
 const app = express();
@@ -23,7 +24,7 @@ async function main() {
   connection({ db: "mongodb://mongodb:27017/database" });
   // await mongoose.connect("mongodb://mongodb:27017/database");
   const repo = new NoticeMongoRepository();
-  const scraper = new ScraperRequestPromise();
+  const scraper = new ScraperRequestPromiseV2();
   const idGenerator = new IdGeneratorMongoose();
   const test = new ElMundoScrapper(repo, scraper, idGenerator);
   test.run();
