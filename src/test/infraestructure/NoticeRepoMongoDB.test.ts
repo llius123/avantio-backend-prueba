@@ -1,9 +1,7 @@
 import mongoose from "mongoose";
-import { Schema, model } from "mongoose";
-import { Notice } from "../../src/domain/Notice";
-import { ElMundoDTO } from "../../src/dto/ElMundoDTO";
-import { ElMundoRepository } from "../../src/repository/ElMundoRepository";
-import { connection } from "../../src/repository/MongoDBConnection";
+import { Notice } from "../../domain/Notice";
+import { NoticeMongoRepository } from "../../repository/NoticeMongoRepository";
+import { connection } from "../../repository/MongoDBConnection";
 
 describe("Notice repo", () => {
   beforeEach(async () => {
@@ -19,7 +17,7 @@ describe("Notice repo", () => {
     THEN the notice is saved
   `, async () => {
     // GIVEN
-    const elMundoRepository = new ElMundoRepository();
+    const elMundoRepository = new NoticeMongoRepository();
     const notice = new Notice(
       new mongoose.Types.ObjectId()._id.toString(),
       "title",
@@ -37,7 +35,7 @@ describe("Notice repo", () => {
     WHEN i get all
     THEN i get all
   `, async () => {
-    const elMundoRepository = new ElMundoRepository();
+    const elMundoRepository = new NoticeMongoRepository();
     const notice1 = new Notice(
       new mongoose.Types.ObjectId()._id.toString(),
       "title",
@@ -61,7 +59,7 @@ describe("Notice repo", () => {
   WHEN i search by url
   THEN i get the notice
 `, async () => {
-    const elMundoRepository = new ElMundoRepository();
+    const elMundoRepository = new NoticeMongoRepository();
     const notice = new Notice(
       new mongoose.Types.ObjectId()._id.toString(),
       "title",

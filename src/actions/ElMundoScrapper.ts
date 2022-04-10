@@ -1,21 +1,21 @@
 import { Notice } from "../domain/Notice";
-import { ElMundoRepository } from "../repository/ElMundoRepository";
+import { NoticeMongoRepository } from "../repository/NoticeMongoRepository";
 import mongoose from "mongoose";
 import { Scraper } from "../utils/Scraper";
 import { IdGenerator } from "../utils/IdGenerator";
 
 export class ElMundoScrapper {
-  private repo: ElMundoRepository;
+  private repo: NoticeMongoRepository;
   private scraper: Scraper;
   private idGenerator: IdGenerator;
   private url = "https://www.elmundo.es/";
   constructor(
-    elMundoRepo: ElMundoRepository,
-    Scraper: Scraper,
+    noticeRepo: NoticeMongoRepository,
+    scraper: Scraper,
     idGenerator: IdGenerator
   ) {
-    this.repo = elMundoRepo;
-    this.scraper = Scraper;
+    this.repo = noticeRepo;
+    this.scraper = scraper;
     this.idGenerator = idGenerator;
   }
 

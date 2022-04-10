@@ -1,8 +1,8 @@
-import { ElMundoRepoMock } from "./ElMundoRepoMock";
-import { ElMundoScrapper } from "../../src/actions/ElMundoScrapper";
+import { ElMundoScrapper } from "../../actions/ElMundoScrapper";
 import { ScraperMock } from "./ScraperMock";
-import { Notice } from "../../src/domain/Notice";
+import { Notice } from "../../domain/Notice";
 import { IdGeneratorMock } from "./IdGeneratorMock";
+import { NoticeRepoMock } from "./NoticeRepoMock";
 
 describe("ElMundoScraper", () => {
   it(`
@@ -16,7 +16,7 @@ describe("ElMundoScraper", () => {
       return "62529656d717a077bec16624";
     });
 
-    const elMundoRepoMock = new ElMundoRepoMock();
+    const elMundoRepoMock = new NoticeRepoMock();
     const elMundoRepoMockSpy = jest.spyOn(elMundoRepoMock, "save");
 
     const scraperMock = new ScraperMock();
@@ -65,7 +65,7 @@ describe("ElMundoScraper", () => {
       return "62529656d717a077bec16624";
     });
 
-    const elMundoRepoMock = new ElMundoRepoMock();
+    const elMundoRepoMock = new NoticeRepoMock();
     const elMundoRepoMockSpy = jest.spyOn(elMundoRepoMock, "save");
 
     const scraperMock = new ScraperMock();
@@ -109,7 +109,7 @@ describe("ElMundoScraper", () => {
       return "62529656d717a077bec16624";
     });
 
-    const elMundoRepoMock = new ElMundoRepoMock();
+    const elMundoRepoMock = new NoticeRepoMock();
     const elMundoRepoMockSpy = jest.spyOn(elMundoRepoMock, "save");
 
     const scraperMock = new ScraperMock();
@@ -172,7 +172,7 @@ describe("ElMundoScraper", () => {
       return "62529656d717a077bec16624";
     });
 
-    const elMundoRepoMock = new ElMundoRepoMock();
+    const elMundoRepoMock = new NoticeRepoMock();
     const elMundoRepoMockSpy = jest.spyOn(elMundoRepoMock, "save");
 
     const scraperMock = new ScraperMock();
@@ -215,7 +215,7 @@ describe("ElMundoScraper", () => {
       return "62529656d717a077bec16624";
     });
 
-    const elMundoRepoMock = new ElMundoRepoMock();
+    const elMundoRepoMock = new NoticeRepoMock();
     const elMundoRepoMockSpy = jest.spyOn(elMundoRepoMock, "save");
     jest.spyOn(elMundoRepoMock, "findOneBy").mockImplementation(async () => {
       return await new Promise((res) =>

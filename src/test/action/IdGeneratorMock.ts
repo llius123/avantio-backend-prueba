@@ -1,4 +1,4 @@
-import { IdGenerator } from "../../src/utils/IdGenerator";
+import { IdGenerator } from "../../utils/IdGenerator";
 
 export class IdGeneratorMock implements IdGenerator {
   constructor() {}

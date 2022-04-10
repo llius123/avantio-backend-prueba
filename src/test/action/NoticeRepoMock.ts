@@ -1,9 +1,6 @@
-import { Notice } from "../../src/domain/Notice";
-import {
-  Filter,
-  NoticeRepository,
-} from "../../src/repository/NoticeRepository";
-export class ElMundoRepoMock implements NoticeRepository {
+import { Notice } from "../../domain/Notice";
+import { Filter, NoticeRepository } from "../../repository/NoticeRepository";
+export class NoticeRepoMock implements NoticeRepository {
   constructor() {}
 
   async save(notice: Notice): Promise<void> {

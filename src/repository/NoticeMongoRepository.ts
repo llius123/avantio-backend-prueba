@@ -3,7 +3,7 @@ import { Notice } from "../domain/Notice";
 import { noticeMongoSchema } from "./MongoDBConnection";
 import { mapElMundoDTOToElMundoDomain } from "../map/mapElMundoDTOToElMundoDomain";
 
-export class ElMundoRepository implements NoticeRepository {
+export class NoticeMongoRepository implements NoticeRepository {
   constructor() {}
 
   async save(elMundo: Notice): Promise<void> {

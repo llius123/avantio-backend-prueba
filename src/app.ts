@@ -2,10 +2,8 @@ import express from "express";
 import { Request, Response } from "express";
 import "reflect-metadata";
 import { ElMundoScrapper } from "./actions/ElMundoScrapper";
-import { ElPaisScrapper } from "./actions/ElPaisScrapper";
-import { ElMundoRepository } from "./repository/ElMundoRepository";
+import { NoticeMongoRepository } from "./repository/NoticeMongoRepository";
 import { ScraperRequestPromise } from "./utils/ScraperRequestPromise";
-import mongoose from "mongoose";
 import { connection } from "./repository/MongoDBConnection";
 import { IdGeneratorMongoose } from "./utils/IdGeneratorMongoose";
 
@@ -24,7 +22,7 @@ main();
 async function main() {
   connection({ db: "mongodb://mongodb:27017/database" });
   // await mongoose.connect("mongodb://mongodb:27017/database");
-  const repo = new ElMundoRepository();
+  const repo = new NoticeMongoRepository();
   const scraper = new ScraperRequestPromise();
   const idGenerator = new IdGeneratorMongoose();
   const test = new ElMundoScrapper(repo, scraper, idGenerator);

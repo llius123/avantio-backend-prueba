@@ -1,4 +1,4 @@
-import { Scraper } from "../../src/utils/Scraper";
+import { Scraper } from "../../utils/Scraper";
 
 export class ScraperMock implements Scraper {
   constructor() {}
