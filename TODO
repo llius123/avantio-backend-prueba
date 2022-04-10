@@ -25,7 +25,9 @@ TODO:
                         Revisar el final a ver si durante el proceso obtiene mas contexto
                     ☐ 2-Crear tests
                         ✔ 1-Crear test infraestructura @done(22-04-09 23:39)
-                        ☐ Crear test unitario para la accion
+                        ☐ 2-Crear test unitario para la accion
+                            ✔ 1-Crear happy path @done(22-04-10 17:24)
+                            ☐ 2-Crear casos de uso que verifiquen la excepciones
                     ☐ No guardar datos si ya estan guardados en la bbdd
                     ☐ Revisar el filtrado de duplicados/objetos vacios
         ☐ Crear un endpoint para ejecutar el servicio de scrapping
