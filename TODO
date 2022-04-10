@@ -28,13 +28,14 @@ TODO:
                         ✔ 2-Crear test unitario para la accion @done(22-04-10 17:36)
                             ✔ 1-Crear happy path @done(22-04-10 17:24)
                             ✔ 2-Crear casos de uso que verifiquen la excepciones @done(22-04-10 17:36)
-                    ☐ 3-No guardar datos si ya estan guardados en la bbdd
-                    ☐ Revisar el filtrado de duplicados/objetos vacios
+                    ✔ 3-No guardar datos si ya estan guardados en la bbdd @done(22-04-10 18:13)
+                    ☐ 4-Refactor ElMundo
         ☐ Crear un endpoint para ejecutar el servicio de scrapping
     ☐ Crear un CRUD para gestionar servicios del modelo Feed.
     ☐ Poder añadir a mano noticias a traves de la api
 
 Deuda tecnica:
+    ☐ Revisar el filtrado de duplicados/objetos vacios
     ☐ Refactorizar todos los uuid y crear una capa de abstraccion encima de esta libreria
     ☐ removeDuplicateNews de ElMundo no me acaba de convencer, dar otra vuelta
     ☐ Intentar quitar los any de las acciones de ElMundo
