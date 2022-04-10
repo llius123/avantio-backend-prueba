@@ -7,6 +7,7 @@ import { ScraperRequestPromise } from "./utils/ScraperRequestPromise";
 import { connection } from "./repository/MongoDBConnection";
 import { IdGeneratorMongoose } from "./utils/IdGeneratorMongoose";
 import { ScraperRequestPromiseV2 } from "./utils/ScraperRequestPromiseV2";
+import { ElPaisScrapper } from "./actions/ElPaisScrapper";
 
 // Create Express server
 const app = express();
@@ -23,9 +24,11 @@ main();
 async function main() {
   connection({ db: "mongodb://mongodb:27017/database" });
   // await mongoose.connect("mongodb://mongodb:27017/database");
+  // ElPais -> utf8
+  // ElMundo -> latin1
   const repo = new NoticeMongoRepository();
   const scraper = new ScraperRequestPromiseV2();
   const idGenerator = new IdGeneratorMongoose();
-  const test = new ElMundoScrapper(repo, scraper, idGenerator);
+  const test = new ElPaisScrapper(repo, scraper, idGenerator);
   test.run();
 }

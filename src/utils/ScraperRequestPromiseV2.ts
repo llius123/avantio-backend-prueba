@@ -10,8 +10,8 @@ export interface ScrapedData {
 export class ScraperRequestPromiseV2 implements Scraper {
   constructor() {}
 
-  async run(url: string, htmlTagToScrap: string) {
-    const all: any = await rp({ url: url, encoding: "latin1" })
+  async run(url: string, htmlTagToScrap: string, encoding: "utf8" | "latin1") {
+    const all: any = await rp({ url: url, encoding: encoding })
       .then(function (html) {
         const a = $.load(html);
         return a(htmlTagToScrap, html);

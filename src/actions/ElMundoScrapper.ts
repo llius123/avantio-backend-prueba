@@ -21,7 +21,11 @@ export class ElMundoScrapper {
   }
 
   public async run() {
-    const allLinks: ScrapedData[] = await this.scraper.run(this.url, "a");
+    const allLinks: ScrapedData[] = await this.scraper.run(
+      this.url,
+      "a",
+      "latin1"
+    );
 
     const allLinksFiltered: ScrapedData[] = this.removeBadLinks(allLinks);
     const allLinksFilteredByDate: ScrapedData[] =
