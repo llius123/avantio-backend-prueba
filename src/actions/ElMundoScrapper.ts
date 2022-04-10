@@ -32,7 +32,7 @@ export class ElMundoScrapper {
     const allLinksWithoutComments: ScrapedData[] = this.removeCommentsLinks(
       allLinksWithoutDuplicates
     );
-    allLinksWithoutComments.forEach(async (link) => {
+    await allLinksWithoutComments.forEach(async (link) => {
       await this.saveNotice(
         new Notice(this.idGenerator.run(), link.title, link.url)
       );
