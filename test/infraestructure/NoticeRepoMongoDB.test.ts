@@ -11,7 +11,7 @@ describe("Notice repo", () => {
   });
 
   afterEach(async () => {
-    await mongoose.connection.dropCollection("elmundos");
+    await mongoose.connection.dropCollection("notices");
   });
   it(`
     GIVEN i have a notice
