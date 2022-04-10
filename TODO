@@ -28,7 +28,7 @@ TODO:
                         ✔ 2-Crear test unitario para la accion @done(22-04-10 17:36)
                             ✔ 1-Crear happy path @done(22-04-10 17:24)
                             ✔ 2-Crear casos de uso que verifiquen la excepciones @done(22-04-10 17:36)
-                    ☐ No guardar datos si ya estan guardados en la bbdd
+                    ☐ 3-No guardar datos si ya estan guardados en la bbdd
                     ☐ Revisar el filtrado de duplicados/objetos vacios
         ☐ Crear un endpoint para ejecutar el servicio de scrapping
     ☐ Crear un CRUD para gestionar servicios del modelo Feed.

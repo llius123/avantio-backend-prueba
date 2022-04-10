@@ -204,4 +204,52 @@ describe("ElMundoScraper", () => {
 
     expect(elMundoRepoMockSpy).not.toBeCalled();
   });
+  it(`
+  GIVEN i want to scrape el mundo
+  WHEN i scrape El mundo and get news that are already on repo
+  THEN i should not save this duplicated notice
+`, async () => {
+    // WHEN
+    const idGenerator = new IdGeneratorMock();
+    jest.spyOn(idGenerator, "run").mockImplementation(() => {
+      return "62529656d717a077bec16624";
+    });
+
+    const elMundoRepoMock = new ElMundoRepoMock();
+    const elMundoRepoMockSpy = jest.spyOn(elMundoRepoMock, "save");
+    jest.spyOn(elMundoRepoMock, "findOneBy").mockImplementation(async () => {
+      return await new Promise((res) =>
+        res(new Notice("FAKE_ID", "FAKE_TITLE", "FAKE_URL"))
+      );
+    });
+
+    const scraperMock = new ScraperMock();
+    jest.spyOn(scraperMock, "run").mockImplementation(async () => {
+      return [
+        {
+          attribs: {
+            href: "https://www.elmundo.es/internacional/2022/04/09/6251c2a9e4d4d843778b459d.html",
+          },
+          children: [
+            {
+              children: [
+                {
+                  data: 'La guerra rompe los lazos prorrusos en el este de Ucrania: "No creo que nunca les perdonemos, es imposible"',
+                },
+              ],
+            },
+          ],
+        },
+      ];
+    });
+    jest.useFakeTimers().setSystemTime(new Date("2022-04-09"));
+    const action = new ElMundoScrapper(
+      elMundoRepoMock,
+      scraperMock,
+      idGenerator
+    );
+    await action.run();
+
+    expect(elMundoRepoMockSpy).not.toBeCalled();
+  });
 });

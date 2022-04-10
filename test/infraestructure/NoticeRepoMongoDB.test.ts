@@ -55,4 +55,24 @@ describe("Notice repo", () => {
     const notices = await elMundoRepository.getAll();
     expect(notices).toEqual([notice1, notice2]);
   });
+
+  it(`
+  GIVEN I have 1 notice in repo
+  WHEN i search by url
+  THEN i get the notice
+`, async () => {
+    const elMundoRepository = new ElMundoRepository();
+    const notice = new Notice(
+      new mongoose.Types.ObjectId()._id.toString(),
+      "title",
+      "url"
+    );
+    // WHEN
+    await elMundoRepository.save(notice);
+    const noticeOnRepo = await elMundoRepository.findOneBy({
+      url: notice.getUrl(),
+    });
+    // THEN
+    expect(noticeOnRepo).toEqual(notice);
+  });
 });
