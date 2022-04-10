@@ -1,5 +1,8 @@
 import { Notice } from "../../src/domain/Notice";
-import { NoticeRepository } from "../../src/repository/NoticeRepository";
+import {
+  Filter,
+  NoticeRepository,
+} from "../../src/repository/NoticeRepository";
 export class ElMundoRepoMock implements NoticeRepository {
   constructor() {}
 
@@ -12,6 +15,12 @@ export class ElMundoRepoMock implements NoticeRepository {
   async getAll(): Promise<Notice[]> {
     return await new Promise((res, rej) => {
       res([]);
+    });
+  }
+
+  async findOneBy(filter: Filter): Promise<Notice | null> {
+    return await new Promise((res, rej) => {
+      res(null);
     });
   }
 }

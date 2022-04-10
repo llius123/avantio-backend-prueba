@@ -38,8 +38,17 @@ export class ElMundoScrapper {
       index < elMundoDataWithoutDuplicateNotices.length;
       index++
     ) {
-      await this.repo.save(elMundoDataWithoutDuplicateNotices[index]);
+      await this.saveNotice(elMundoDataWithoutDuplicateNotices[index]);
     }
+  }
+
+  private async saveNotice(notice: Notice): Promise<void> {
+    const noticeInRepo = await this.repo.findOneBy({ url: notice.getUrl() });
+
+    if (noticeInRepo) {
+      return;
+    }
+    await this.repo.save(notice);
   }
 
   private removeDuplicateNews(elMundoData: Notice[]): Notice[] {
