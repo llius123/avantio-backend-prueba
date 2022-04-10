@@ -5,7 +5,7 @@ import mongoose from "mongoose";
 import { Filter, NoticeRepository } from "./NoticeRepository";
 import { Notice } from "../domain/Notice";
 import { mapElMundoDomainToElMundoRepo } from "../map/mapElMundoDomainToElMundoRepo";
-import ElMundo from "../repository/MongoDBRepo";
+import ElMundo from "./MongoDBConnection";
 import { mapElMundoDTOToElMundoDomain } from "../map/mapElMundoDTOToElMundoDomain";
 
 export class ElMundoRepository implements NoticeRepository {

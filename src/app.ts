@@ -6,7 +6,7 @@ import { ElPaisScrapper } from "./actions/ElPaisScrapper";
 import { ElMundoRepository } from "./repository/ElMundoRepository";
 import { ScraperRequestPromise } from "./utils/ScraperRequestPromise";
 import mongoose from "mongoose";
-import { connection } from "./repository/MongoDBRepo";
+import { connection } from "./repository/MongoDBConnection";
 import { IdGeneratorMongoose } from "./utils/IdGeneratorMongoose";
 
 // Create Express server

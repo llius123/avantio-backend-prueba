@@ -3,7 +3,7 @@ import { Schema, model } from "mongoose";
 import { Notice } from "../../src/domain/Notice";
 import { ElMundoDTO } from "../../src/dto/ElMundoDTO";
 import { ElMundoRepository } from "../../src/repository/ElMundoRepository";
-import { connection } from "../../src/repository/MongoDBRepo";
+import { connection } from "../../src/repository/MongoDBConnection";
 
 describe("Notice repo", () => {
   beforeEach(async () => {
