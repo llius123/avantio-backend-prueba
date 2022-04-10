@@ -6,35 +6,24 @@ import { NoticeRepoMock } from "./NoticeRepoMock";
 
 describe("ElMundoScraper", () => {
   it(`
-  GIVEN i want to scrape el mundo
-        WHEN i scrape El mundo
-        THEN i should get one link
-    `, async () => {
-    // WHEN
+    GIVEN I want to scrape "ElMundo"
+    WHEN i scrape the webpage
+    THEN i should save on repo the new
+  `, async () => {
+    // GIVEN
     const idGenerator = new IdGeneratorMock();
     jest.spyOn(idGenerator, "run").mockImplementation(() => {
       return "62529656d717a077bec16624";
     });
-
     const elMundoRepoMock = new NoticeRepoMock();
     const elMundoRepoMockSpy = jest.spyOn(elMundoRepoMock, "save");
-
     const scraperMock = new ScraperMock();
     jest.spyOn(scraperMock, "run").mockImplementation(async () => {
       return [
         {
-          attribs: {
-            href: "https://www.elmundo.es/internacional/2022/04/09/6251c2a9e4d4d843778b459d.html",
-          },
-          children: [
-            {
-              children: [
-                {
-                  data: 'La guerra rompe los lazos prorrusos en el este de Ucrania: "No creo que nunca les perdonemos, es imposible"',
-                },
-              ],
-            },
-          ],
+          title:
+            'La guerra rompe los lazos prorrusos en el este de Ucrania: "No creo que nunca les perdonemos, es imposible"',
+          url: "https://www.elmundo.es/internacional/2022/04/09/6251c2a9e4d4d843778b459d.html",
         },
       ];
     });
@@ -44,8 +33,9 @@ describe("ElMundoScraper", () => {
       scraperMock,
       idGenerator
     );
+    // WHEN
     await action.run();
-
+    // THEN
     expect(elMundoRepoMockSpy).toBeCalledWith(
       new Notice(
         "62529656d717a077bec16624",
@@ -55,10 +45,10 @@ describe("ElMundoScraper", () => {
     );
   });
   it(`
-  GIVEN i want to scrape el mundo
-    WHEN i scrappe el mundo and the url is not valid
-    THEN that new is not saved
-  `, async () => {
+    GIVEN i want to scrape el mundo
+      WHEN i scrappe el mundo and the url is not valid
+      THEN that new is not saved
+    `, async () => {
     // WHEN
     const idGenerator = new IdGeneratorMock();
     jest.spyOn(idGenerator, "run").mockImplementation(() => {
@@ -89,10 +79,10 @@ describe("ElMundoScraper", () => {
   });
 
   it(`
-  GIVEN i want to scrape el mundo
-  WHEN i scrappe el mundo and the new is duplicated
-  THEN that new is not saved
-`, async () => {
+    GIVEN i want to scrape el mundo
+    WHEN i scrappe el mundo and the new is duplicated
+    THEN that new is not saved
+  `, async () => {
     // WHEN
     const idGenerator = new IdGeneratorMock();
     jest.spyOn(idGenerator, "run").mockImplementation(() => {
@@ -106,32 +96,15 @@ describe("ElMundoScraper", () => {
     jest.spyOn(scraperMock, "run").mockImplementation(async () => {
       return [
         {
-          attribs: {
-            href: "https://www.elmundo.es/internacional/2022/04/09/6251c2a9e4d4d843778b459d.html",
-          },
-          children: [
-            {
-              children: [
-                {
-                  data: 'La guerra rompe los lazos prorrusos en el este de Ucrania: "No creo que nunca les perdonemos, es imposible"',
-                },
-              ],
-            },
-          ],
+          title:
+            'La guerra rompe los lazos prorrusos en el este de Ucrania: "No creo que nunca les perdonemos, es imposible"',
+          url: "https://www.elmundo.es/internacional/2022/04/09/6251c2a9e4d4d843778b459d.html",
         },
+
         {
-          attribs: {
-            href: "https://www.elmundo.es/internacional/2022/04/09/6251c2a9e4d4d843778b459d.html",
-          },
-          children: [
-            {
-              children: [
-                {
-                  data: 'La guerra rompe los lazos prorrusos en el este de Ucrania: "No creo que nunca les perdonemos, es imposible"',
-                },
-              ],
-            },
-          ],
+          title:
+            'La guerra rompe los lazos prorrusos en el este de Ucrania: "No creo que nunca les perdonemos, es imposible"',
+          url: "https://www.elmundo.es/internacional/2022/04/09/6251c2a9e4d4d843778b459d.html",
         },
       ];
     });
@@ -152,10 +125,10 @@ describe("ElMundoScraper", () => {
     );
   });
   it(`
-        GIVEN i want to scrape el mundo
-        WHEN i scrape El mundo with specfic date
-        THEN i should save news from the specfic date
-    `, async () => {
+      GIVEN i want to scrape el mundo
+      WHEN i scrape El mundo with specfic date
+      THEN i should save news from the specfic date
+  `, async () => {
     // WHEN
     const idGenerator = new IdGeneratorMock();
     jest.spyOn(idGenerator, "run").mockImplementation(() => {
@@ -169,18 +142,9 @@ describe("ElMundoScraper", () => {
     jest.spyOn(scraperMock, "run").mockImplementation(async () => {
       return [
         {
-          attribs: {
-            href: "https://www.elmundo.es/internacional/2011/01/01/6251c2a9e4d4d843778b459d.html",
-          },
-          children: [
-            {
-              children: [
-                {
-                  data: 'La guerra rompe los lazos prorrusos en el este de Ucrania: "No creo que nunca les perdonemos, es imposible"',
-                },
-              ],
-            },
-          ],
+          url: "https://www.elmundo.es/internacional/2011/01/01/6251c2a9e4d4d843778b459d.html",
+          title:
+            'La guerra rompe los lazos prorrusos en el este de Ucrania: "No creo que nunca les perdonemos, es imposible"',
         },
       ];
     });
@@ -195,10 +159,10 @@ describe("ElMundoScraper", () => {
     expect(elMundoRepoMockSpy).not.toBeCalled();
   });
   it(`
-  GIVEN i want to scrape el mundo
-  WHEN i scrape El mundo and get news that are already on repo
-  THEN i should not save this duplicated notice
-`, async () => {
+    GIVEN i want to scrape el mundo
+    WHEN i scrape El mundo and get news that are already on repo
+    THEN i should not save this duplicated notice
+  `, async () => {
     // WHEN
     const idGenerator = new IdGeneratorMock();
     jest.spyOn(idGenerator, "run").mockImplementation(() => {
@@ -217,18 +181,9 @@ describe("ElMundoScraper", () => {
     jest.spyOn(scraperMock, "run").mockImplementation(async () => {
       return [
         {
-          attribs: {
-            href: "https://www.elmundo.es/internacional/2022/04/09/6251c2a9e4d4d843778b459d.html",
-          },
-          children: [
-            {
-              children: [
-                {
-                  data: 'La guerra rompe los lazos prorrusos en el este de Ucrania: "No creo que nunca les perdonemos, es imposible"',
-                },
-              ],
-            },
-          ],
+          url: "https://www.elmundo.es/internacional/2022/04/09/6251c2a9e4d4d843778b459d.html",
+          title:
+            'La guerra rompe los lazos prorrusos en el este de Ucrania: "No creo que nunca les perdonemos, es imposible"',
         },
       ];
     });
