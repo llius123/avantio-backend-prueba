@@ -30,6 +30,7 @@ TODO:
                             ✔ 2-Crear casos de uso que verifiquen la excepciones @done(22-04-10 17:36)
                     ✔ 3-No guardar datos si ya estan guardados en la bbdd @done(22-04-10 18:13)
                     ✔ 4-Refactor ElPais @done(22-04-10 20:34)
+                    ☐ 5-Refactorizar el scrapper @started(22-04-10 20:35)
         ☐ Crear un endpoint para ejecutar el servicio de scrapping
     ☐ Crear un CRUD para gestionar servicios del modelo Feed.
     ☐ Poder añadir a mano noticias a traves de la api

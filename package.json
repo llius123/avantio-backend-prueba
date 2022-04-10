@@ -34,7 +34,8 @@
     "nodemon": "2.0.15",
     "ts-node": "^10.7.0",
     "@types/request-promise": "4.1.48",
-    "@types/uuid": "8.3.4"
+    "@types/uuid": "8.3.4",
+    "@types/cheerio": "0.22.31"
   },
   "dependencies": {
     "express": "^4.17.2",
