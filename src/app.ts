@@ -7,6 +7,7 @@ import { ElMundoRepository } from "./repository/ElMundoRepository";
 import { ScraperRequestPromise } from "./utils/ScraperRequestPromise";
 import mongoose from "mongoose";
 import { connection } from "./repository/MongoDBRepo";
+import { IdGeneratorMongoose } from "./utils/IdGeneratorMongoose";
 
 // Create Express server
 const app = express();
@@ -25,6 +26,7 @@ async function main() {
   // await mongoose.connect("mongodb://mongodb:27017/database");
   const repo = new ElMundoRepository();
   const scraper = new ScraperRequestPromise();
-  const test = new ElMundoScrapper(repo, scraper);
+  const idGenerator = new IdGeneratorMongoose();
+  const test = new ElMundoScrapper(repo, scraper, idGenerator);
   test.run();
 }

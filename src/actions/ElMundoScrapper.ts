@@ -2,14 +2,21 @@ import { Notice } from "../domain/Notice";
 import { ElMundoRepository } from "../repository/ElMundoRepository";
 import mongoose from "mongoose";
 import { Scraper } from "../utils/Scraper";
+import { IdGenerator } from "../utils/IdGenerator";
 
 export class ElMundoScrapper {
   private repo: ElMundoRepository;
   private scraper: Scraper;
+  private idGenerator: IdGenerator;
   private url = "https://www.elmundo.es/";
-  constructor(elMundoRepo: ElMundoRepository, Scraper: Scraper) {
+  constructor(
+    elMundoRepo: ElMundoRepository,
+    Scraper: Scraper,
+    idGenerator: IdGenerator
+  ) {
     this.repo = elMundoRepo;
     this.scraper = Scraper;
+    this.idGenerator = idGenerator;
   }
 
   public async run() {
@@ -63,11 +70,9 @@ export class ElMundoScrapper {
       const dateFormatted = this.getDateFormatted();
 
       if (urlLinkTag.includes(dateFormatted)) {
-        const id = new mongoose.Types.ObjectId();
+        const id = this.idGenerator.run();
         const title = this.getTitleFromLink(htmlLinkTagElement);
-        elMundoDomainData.push(
-          new Notice(id._id.toString(), title, urlLinkTag)
-        );
+        elMundoDomainData.push(new Notice(id, title, urlLinkTag));
       }
     }
     return elMundoDomainData;
