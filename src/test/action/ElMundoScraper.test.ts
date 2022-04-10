@@ -56,7 +56,7 @@ describe("ElMundoScraper", () => {
   });
   it(`
   GIVEN i want to scrape el mundo
-    WHEN i scrappe el mundo and the new title is not valid
+    WHEN i scrappe el mundo and the url is not valid
     THEN that new is not saved
   `, async () => {
     // WHEN
@@ -72,18 +72,8 @@ describe("ElMundoScraper", () => {
     jest.spyOn(scraperMock, "run").mockImplementation(async () => {
       return [
         {
-          attribs: {
-            href: "https://www.elmundo.es/internacional/2022/04/09/6251c2a9e4d4d843778b459d.html",
-          },
-          children: [
-            {
-              children: [
-                {
-                  data: "1",
-                },
-              ],
-            },
-          ],
+          title: "1",
+          url: "https://www.elmundo.es/internacional/2022/04/09/6251c2a9e4d4d843778b459d.html#ancla_comentarios",
         },
       ];
     });
