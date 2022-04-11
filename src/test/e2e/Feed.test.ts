@@ -115,6 +115,44 @@ describe("Feed", () => {
         expect(res.body).toEqual({ ...mapElMundoDomainToElMundoDTO(notice) });
       });
   });
+  it(`
+  GIVEN i want to update a feed
+  WHEN i send the updated feed
+  THEN the feed is updated
+`, async () => {
+    //GIVEN
+    const noticeRepo = new NoticeMongoRepository();
+    const id = idGenerator.run();
+    const notice = new Notice(id, "Title", "url");
+    const notice2 = new Notice(id, "TitleUpdated", "urlUpdated");
+    await noticeRepo.save(notice);
+    //WHEN
+    await request(app)
+      .post("/feed")
+      .send({
+        ...mapElMundoDomainToElMundoDTO(notice),
+      })
+      .expect((res) => {
+        // THEN
+        expect(res.status).toEqual(200);
+      });
+    await request(app)
+      .put("/feed")
+      .send({
+        ...mapElMundoDomainToElMundoDTO(notice2),
+      })
+      .expect((res) => {
+        // THEN
+        expect(res.status).toEqual(200);
+      });
+    await request(app)
+      .get("/feed/" + notice.getId())
+      .expect((res) => {
+        // THEN
+        expect(res.status).toEqual(200);
+        expect(res.body).toEqual({ ...mapElMundoDomainToElMundoDTO(notice2) });
+      });
+  });
 });
 
 const idGenerator = new IdGeneratorMongoose();

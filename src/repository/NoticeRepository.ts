@@ -12,4 +12,5 @@ export interface NoticeRepository {
   getById: (id: string) => Promise<Notice | null>;
   delete: (id: string) => Promise<void>;
   create: (notice: Notice) => Promise<void>;
+  update: (notice: Notice) => Promise<void>;
 }

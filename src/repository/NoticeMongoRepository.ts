@@ -3,6 +3,7 @@ import { Notice } from "../domain/Notice";
 import { noticeMongoSchema } from "./MongoDBConnection";
 import { mapElMundoDTOToElMundoDomain } from "../map/mapElMundoDTOToElMundoDomain";
 import { NoticeDTO } from "../dto/NoticeDTO";
+import { mapElMundoDomainToElMundoDTO } from "../map/mapElMundoDomainToElMundoDTO";
 
 export class NoticeMongoRepository implements NoticeRepository {
   constructor() {}
@@ -68,5 +69,21 @@ export class NoticeMongoRepository implements NoticeRepository {
 
   async create(notice: Notice): Promise<void> {
     await noticeMongoSchema.create(notice);
+  }
+
+  async update(notice: Notice): Promise<void> {
+    const noticeToUpdate: NoticeDTO | null = await noticeMongoSchema.findOne({
+      id: notice.getId(),
+    });
+    if (noticeToUpdate === null) {
+      return;
+    }
+    noticeToUpdate.url = notice.getUrl();
+    noticeToUpdate.title = notice.getTitle();
+    await noticeMongoSchema.updateOne({
+      id: notice.getId(),
+      title: notice.getTitle(),
+      url: notice.getUrl(),
+    });
   }
 }

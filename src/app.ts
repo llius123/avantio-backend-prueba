@@ -8,7 +8,7 @@ import { connection } from "./repository/MongoDBConnection";
 import { IdGeneratorMongoose } from "./utils/IdGeneratorMongoose";
 import { ScraperRequestPromiseV2 } from "./utils/ScraperRequestPromiseV2";
 import { ElPaisScrapper } from "./actions/ElPaisScrapper";
-import { UpdateFeed } from "./actions/UpdateFeed";
+import { UpdateFeedService } from "./actions/UpdateFeedService";
 import { GetFeed } from "./actions/GetFeed";
 import { Notice } from "./domain/Notice";
 import { mapElMundoDomainToElMundoDTO } from "./map/mapElMundoDomainToElMundoDTO";
@@ -16,6 +16,7 @@ import http from "http";
 import { GetFeedById } from "./actions/GetFeedById";
 import { DeleteFeed } from "./actions/DeleteFeed";
 import { CreateFeed } from "./actions/CreateFeed";
+import { UpdateFeed } from "./actions/UpdateFeed";
 
 // Create Express server
 export const app = express();
@@ -27,7 +28,7 @@ app.get("/updateFeed", async (req: Request, res: Response) => {
   const repo = new NoticeMongoRepository();
   const scraper = new ScraperRequestPromiseV2();
   const idGenerator = new IdGeneratorMongoose();
-  const action = new UpdateFeed(repo, scraper, idGenerator);
+  const action = new UpdateFeedService(repo, scraper, idGenerator);
   await action.run();
   return res.status(200).send({ msg: "OK" });
 });
@@ -53,6 +54,17 @@ app.delete("/feed/:id", async (req: Request, res: Response) => {
 app.post("/feed", async (req: Request, res: Response) => {
   const repo = new NoticeMongoRepository();
   const action = new CreateFeed(repo);
+  await action.run({
+    id: req.body.id,
+    title: req.body.title,
+    url: req.body.url,
+  });
+  return res.status(200).send({});
+});
+
+app.put("/feed", async (req: Request, res: Response) => {
+  const repo = new NoticeMongoRepository();
+  const action = new UpdateFeed(repo);
   await action.run({
     id: req.body.id,
     title: req.body.title,
