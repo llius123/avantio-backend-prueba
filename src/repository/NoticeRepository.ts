@@ -9,4 +9,5 @@ export interface NoticeRepository {
   getAll: () => Promise<Notice[]>;
   findOneBy: (filter: Filter) => Promise<Notice | null>;
   get: () => Promise<Notice[]>;
+  getById: (id: string) => Promise<Notice | null>;
 }

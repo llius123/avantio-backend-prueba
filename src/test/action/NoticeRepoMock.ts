@@ -25,4 +25,10 @@ export class NoticeRepoMock implements NoticeRepository {
       res([]);
     });
   }
+
+  async getById(id: string): Promise<Notice | null> {
+    return await new Promise((res, rej) => {
+      res(null);
+    });
+  }
 }

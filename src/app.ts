@@ -13,6 +13,7 @@ import { GetFeed } from "./actions/GetFeed";
 import { Notice } from "./domain/Notice";
 import { mapElMundoDomainToElMundoDTO } from "./map/mapElMundoDomainToElMundoDTO";
 import http from "http";
+import { GetFeedById } from "./actions/GetFeedById";
 
 // Create Express server
 export const app = express();
@@ -32,6 +33,12 @@ app.get("/feed", async (req: Request, res: Response) => {
   const action = new GetFeed(repo);
   const feed: Notice[] = await action.run();
   return res.status(200).send(feed.map(mapElMundoDomainToElMundoDTO));
+});
+app.get("/feed/:id", async (req: Request, res: Response) => {
+  const repo = new NoticeMongoRepository();
+  const action = new GetFeedById(repo);
+  const feed: Notice | null = await action.run(req.params.id);
+  return res.status(200).send(feed ? mapElMundoDomainToElMundoDTO(feed) : {});
 });
 
 // Express configuration

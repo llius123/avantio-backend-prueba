@@ -96,6 +96,23 @@ describe("Notice repo", () => {
     const b = elPaisNotices.slice(0, 5);
     expect(noticeOnRepo).toEqual([...a, ...b]);
   });
+  it(`
+  GIVEN I have 1 notice in repo
+  WHEN i search by id
+  THEN i get the notice
+`, async () => {
+    const elMundoRepository = new NoticeMongoRepository();
+    const notice = new Notice(
+      new mongoose.Types.ObjectId()._id.toString(),
+      "title",
+      "url"
+    );
+    // WHEN
+    await elMundoRepository.save(notice);
+    const noticeOnRepo = await elMundoRepository.getById(notice.getId());
+    // THEN
+    expect(noticeOnRepo).toEqual(notice);
+  });
 });
 
 const idGenerator = new IdGeneratorMongoose();

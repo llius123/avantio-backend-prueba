@@ -51,4 +51,14 @@ export class NoticeMongoRepository implements NoticeRepository {
       .map(mapElMundoDTOToElMundoDomain)
       .concat(noticesElPaisFromRepo.map(mapElMundoDTOToElMundoDomain));
   }
+
+  async getById(id: string): Promise<Notice | null> {
+    const notice = await noticeMongoSchema.findOne({
+      id: id,
+    });
+    if (notice) {
+      return new Notice(notice.id, notice.title, notice.url);
+    }
+    return await null;
+  }
 }
