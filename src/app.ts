@@ -27,7 +27,19 @@ app.get("/updateFeed", async (req: Request, res: Response) => {
 app.get("/", (req: Request, res: Response) => {
   return res.status(200).send({ msg: "Hello world" });
 });
-app.listen(port, () => {
-  connection({ db: "mongodb://mongodb:27017/database" });
+export const server = app.listen(port, () => {
+  console.log("Environment: " + process.env.ENVIRONMENT);
+
+  switch (process.env.ENVIRONMENT) {
+    case "E2E":
+      connection({ db: "mongodb://mongodb:27017/infraestructure-test-e2e" });
+      break;
+    case "PRODUCTION":
+      connection({ db: "mongodb://mongodb:27017/database" });
+      break;
+
+    default:
+      break;
+  }
   console.log(`Example app listening on port ${port}`);
 });

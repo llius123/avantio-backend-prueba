@@ -11,7 +11,7 @@ const noticeSchema = new Schema<NoticeDTO>({
 type TInput = {
   db: string;
 };
-export function connection({ db }: TInput) {
+export function connection({ db }: TInput, debug = false) {
   const connect = () => {
     mongoose
       .connect(db)
@@ -22,6 +22,9 @@ export function connection({ db }: TInput) {
         console.error("Error connecting to database: ", error);
         return process.exit(1);
       });
+    if (debug) {
+      mongoose.set("debug", true);
+    }
   };
   connect();
 
