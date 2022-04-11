@@ -6,10 +6,22 @@ services: #This section defines all the different containers we will create.
     volumes:
       - .:/src
     ports:
-      - 3000-3001
+      - 3000:3000
     command: npm run dev
     depends_on:
       - mongodb
+    env_file:
+      - .env
+  avantio-back-test-e2e:
+    image: node:alpine
+    working_dir: "/src"
+    volumes:
+      - .:/src
+    command: npm run dev
+    depends_on:
+      - mongodb
+    env_file:
+      - .env.e2e
   mongodb:
     container_name: mongodb
     image: mongo
