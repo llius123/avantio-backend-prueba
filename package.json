@@ -9,7 +9,10 @@
     "build": "tsc",
     "lint": "eslint --ignore-path .gitignore . --ext .ts",
     "lint:fix": "npm run lint -- --fix",
-    "test": "jest --verbose --watchAll"
+    "test": "jest --verbose --watchAll",
+    "test:unit": "jest --verbose src/test/action --watchAll",
+    "test:e2e": "jest --verbose src/test/e2e --watchAll",
+    "test:infraestructure": "jest --verbose src/test/infraestructure --watchAll"
   },
   "author": "",
   "license": "ISC",
