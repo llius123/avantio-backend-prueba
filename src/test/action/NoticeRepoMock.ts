@@ -20,4 +20,9 @@ export class NoticeRepoMock implements NoticeRepository {
       res(null);
     });
   }
+  async get(): Promise<Notice[]> {
+    return await new Promise((res, rej) => {
+      res([]);
+    });
+  }
 }

@@ -8,7 +8,7 @@ install:
 up-dev:
 	docker-compose up $(SERVICE_BACK_DATABASE) $(SERVICE_BACK_NAME)
 test-dev:
-	docker-compose run --service-ports --rm $(SERVICE_BACK_NAME) npm run test
+	docker-compose run --service-ports --rm $(SERVICE_BACK_TEST_INFRAESTRUCTURE) npm run test
 test-unit:
 	docker-compose run --service-ports --rm $(SERVICE_BACK_TEST_E2E) npm run test:unit
 test-infraestructure:

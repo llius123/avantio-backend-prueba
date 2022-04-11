@@ -4,13 +4,9 @@ import { app, server } from "../../app";
 import { connection } from "../../repository/MongoDBConnection";
 
 describe("Update feed", () => {
-  beforeEach(async () => {
-    // connection({ db: "mongodb://mongodb:27017/infraestructure-test-e2e" });
-  });
-
   afterEach(async () => {
     await mongoose.connection.dropCollection("notices");
-    server.close();
+    await server.close();
   });
   it(`
         GIVEN I want to use update feed service

@@ -2,6 +2,7 @@ import { Filter, NoticeRepository } from "./NoticeRepository";
 import { Notice } from "../domain/Notice";
 import { noticeMongoSchema } from "./MongoDBConnection";
 import { mapElMundoDTOToElMundoDomain } from "../map/mapElMundoDTOToElMundoDomain";
+import { NoticeDTO } from "../dto/NoticeDTO";
 
 export class NoticeMongoRepository implements NoticeRepository {
   constructor() {}
@@ -32,5 +33,22 @@ export class NoticeMongoRepository implements NoticeRepository {
       );
     }
     return await null;
+  }
+
+  async get(): Promise<Notice[]> {
+    const noticesElMundoFromRepo: NoticeDTO[] = await noticeMongoSchema
+      .find({
+        url: /elmundo/,
+      })
+      .limit(5);
+    const noticesElPaisFromRepo: NoticeDTO[] = await noticeMongoSchema
+      .find({
+        url: /elpais/,
+      })
+      .limit(5);
+
+    return noticesElMundoFromRepo
+      .map(mapElMundoDTOToElMundoDomain)
+      .concat(noticesElPaisFromRepo.map(mapElMundoDTOToElMundoDomain));
   }
 }

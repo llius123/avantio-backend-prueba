@@ -8,4 +8,5 @@ export interface NoticeRepository {
   save: (notice: Notice) => Promise<void>;
   getAll: () => Promise<Notice[]>;
   findOneBy: (filter: Filter) => Promise<Notice | null>;
+  get: () => Promise<Notice[]>;
 }
