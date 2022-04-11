@@ -6,7 +6,7 @@ TODO:
         ✔ 2-Connect api with mongo @done(22-04-08 10:13)
             ✔ Install TypeORM @started(22-04-07 19:11) @done(22-04-07 21:27) @lasted(2h16m27s)
             ✔ Configure TypeORM with database @done(22-04-08 10:09)
-    ☐ 2-Crear un servicio de scrapping
+    ✔ 2-Crear un servicio de scrapping @done(22-04-11 09:51)
         ✔ 1-Configurar las librerias necesarias @started(22-04-08 11:33) @done(22-04-08 11:40) @lasted(7m32s)
         ✔ 2-Crear el servicio de scraping @done(22-04-11 00:08)
             ✔ 1-Scrapear los siguientes periodicos @done(22-04-08 12:37)
@@ -34,10 +34,13 @@ TODO:
         ✔ 3-Crear un endpoint para ejecutar el servicio de scrapping @done(22-04-11 09:50)
             ✔ 1-Crear el endpoint @done(22-04-11 09:50)
             ✔ 2-Crear el test e2e @done(22-04-11 09:50)
-    ☐ Crear un CRUD para gestionar servicios del modelo Feed.
+    ☐ 3-Crear un CRUD para gestionar servicios del modelo Feed.
+        ☐ 1-Get Feed
+        Esto tiene que devolver las 5 noticias de portada de ElPais y de ElMundo
     ☐ Poder añadir a mano noticias a traves de la api
 
 Deuda tecnica:
+    ☐ Refactorizar el nombre de los mappers (Los mapper no mapean a objetos de ElMundo, sino a Notices)
     ☐ En los test e2e y en el controlador estoy devolviendo 200 a pelo, construir un wrapper por encima que contenga los distntos tipos de respeusta
     ☐ Revisar el filtrado de duplicados/objetos vacios
     ☐ Refactorizar todos los uuid y crear una capa de abstraccion encima de esta libreria
