@@ -34,12 +34,14 @@ TODO:
         ✔ 3-Crear un endpoint para ejecutar el servicio de scrapping @done(22-04-11 09:50)
             ✔ 1-Crear el endpoint @done(22-04-11 09:50)
             ✔ 2-Crear el test e2e @done(22-04-11 09:50)
-    ☐ 3-Crear un CRUD para gestionar servicios del modelo Feed.
-        ☐ 1-Get Feed
+    ✔ 3-Crear un CRUD para gestionar servicios del modelo Feed. @done(22-04-11 19:37)
+        ✔ 1-Get Feed @done(22-04-11 19:37)
+        ✔ 2-Hacer test unit, infra, e2e @done(22-04-11 19:37)
         Esto tiene que devolver las 5 noticias de portada de ElPais y de ElMundo
     ☐ Poder añadir a mano noticias a traves de la api
 
 Deuda tecnica:
+    ☐ Refactorizar test e2e porque estan muy "sucios"
     ☐ Refactorizar el nombre de los mappers (Los mapper no mapean a objetos de ElMundo, sino a Notices)
     ☐ En los test e2e y en el controlador estoy devolviendo 200 a pelo, construir un wrapper por encima que contenga los distntos tipos de respeusta
     ☐ Revisar el filtrado de duplicados/objetos vacios
