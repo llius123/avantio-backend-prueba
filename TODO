@@ -31,11 +31,14 @@ TODO:
                     ✔ 3-No guardar datos si ya estan guardados en la bbdd @done(22-04-10 18:13)
                     ✔ 4-Refactor ElPais @done(22-04-10 20:34)
                     ✔ 5-Refactorizar el scrapper @started(22-04-10 20:35) @done(22-04-11 00:08) @lasted(3h33m43s)
-        ☐ 3-Crear un endpoint para ejecutar el servicio de scrapping
+        ✔ 3-Crear un endpoint para ejecutar el servicio de scrapping @done(22-04-11 09:50)
+            ✔ 1-Crear el endpoint @done(22-04-11 09:50)
+            ✔ 2-Crear el test e2e @done(22-04-11 09:50)
     ☐ Crear un CRUD para gestionar servicios del modelo Feed.
     ☐ Poder añadir a mano noticias a traves de la api
 
 Deuda tecnica:
+    ☐ En los test e2e y en el controlador estoy devolviendo 200 a pelo, construir un wrapper por encima que contenga los distntos tipos de respeusta
     ☐ Revisar el filtrado de duplicados/objetos vacios
     ☐ Refactorizar todos los uuid y crear una capa de abstraccion encima de esta libreria
     ☐ removeDuplicateNews de ElMundo no me acaba de convencer, dar otra vuelta
