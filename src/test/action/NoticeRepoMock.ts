@@ -37,4 +37,10 @@ export class NoticeRepoMock implements NoticeRepository {
       res();
     });
   }
+
+  async create(notice: Notice): Promise<void> {
+    return await new Promise((res, rej) => {
+      res();
+    });
+  }
 }

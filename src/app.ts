@@ -15,10 +15,13 @@ import { mapElMundoDomainToElMundoDTO } from "./map/mapElMundoDomainToElMundoDTO
 import http from "http";
 import { GetFeedById } from "./actions/GetFeedById";
 import { DeleteFeed } from "./actions/DeleteFeed";
+import { CreateFeed } from "./actions/CreateFeed";
 
 // Create Express server
 export const app = express();
 const port = 3000;
+
+app.use(express.json());
 
 app.get("/updateFeed", async (req: Request, res: Response) => {
   const repo = new NoticeMongoRepository();
@@ -45,6 +48,16 @@ app.delete("/feed/:id", async (req: Request, res: Response) => {
   const repo = new NoticeMongoRepository();
   const action = new DeleteFeed(repo);
   await action.run(req.params.id);
+  return res.status(200).send({});
+});
+app.post("/feed", async (req: Request, res: Response) => {
+  const repo = new NoticeMongoRepository();
+  const action = new CreateFeed(repo);
+  await action.run({
+    id: req.body.id,
+    title: req.body.title,
+    url: req.body.url,
+  });
   return res.status(200).send({});
 });
 // Express configuration

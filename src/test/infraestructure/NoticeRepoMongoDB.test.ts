@@ -131,6 +131,23 @@ describe("Notice repo", () => {
     // THEN
     expect(noticeOnRepo).toEqual(null);
   });
+  it(`
+  GIVEN I have 1 notice in repo
+  WHEN i delete it
+  THEN the notice is not on the repo
+`, async () => {
+    const elMundoRepository = new NoticeMongoRepository();
+    const notice = new Notice(
+      new mongoose.Types.ObjectId()._id.toString(),
+      "title",
+      "url"
+    );
+    // WHEN
+    await elMundoRepository.create(notice);
+    const noticeOnRepo = await elMundoRepository.getById(notice.getId());
+    // THEN
+    expect(noticeOnRepo).toEqual(notice);
+  });
 });
 
 const idGenerator = new IdGeneratorMongoose();
