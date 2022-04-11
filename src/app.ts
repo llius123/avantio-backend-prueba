@@ -11,7 +11,7 @@ import { ElPaisScrapper } from "./actions/ElPaisScrapper";
 import { UpdateFeed } from "./actions/UpdateFeed";
 
 // Create Express server
-const app = express();
+export const app = express();
 const port = 3000;
 
 app.get("/updateFeed", async (req: Request, res: Response) => {
