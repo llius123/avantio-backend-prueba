@@ -31,4 +31,10 @@ export class NoticeRepoMock implements NoticeRepository {
       res(null);
     });
   }
+
+  async delete(id: string): Promise<void> {
+    return await new Promise((res, rej) => {
+      res();
+    });
+  }
 }

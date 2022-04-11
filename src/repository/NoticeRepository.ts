@@ -10,4 +10,5 @@ export interface NoticeRepository {
   findOneBy: (filter: Filter) => Promise<Notice | null>;
   get: () => Promise<Notice[]>;
   getById: (id: string) => Promise<Notice | null>;
+  delete: (id: string) => Promise<void>;
 }

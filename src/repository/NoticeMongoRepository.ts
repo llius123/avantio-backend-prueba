@@ -61,4 +61,8 @@ export class NoticeMongoRepository implements NoticeRepository {
     }
     return await null;
   }
+
+  async delete(id: string): Promise<void> {
+    await noticeMongoSchema.deleteOne({ id: id });
+  }
 }

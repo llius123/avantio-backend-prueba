@@ -1,15 +1,16 @@
 import { NoticeMongoRepository } from "../repository/NoticeMongoRepository";
+import { NoticeRepository } from "../repository/NoticeRepository";
 import { IdGenerator } from "../utils/IdGenerator";
 import { Scraper } from "../utils/Scraper";
 import { ElMundoScrapper } from "./ElMundoScrapper";
 import { ElPaisScrapper } from "./ElPaisScrapper";
 
 export class UpdateFeed {
-  private repo: NoticeMongoRepository;
+  private repo: NoticeRepository;
   private scraper: Scraper;
   private idGenerator: IdGenerator;
   constructor(
-    noticeRepo: NoticeMongoRepository,
+    noticeRepo: NoticeRepository,
     scraper: Scraper,
     idGenerator: IdGenerator
   ) {

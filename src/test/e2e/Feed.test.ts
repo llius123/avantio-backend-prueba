@@ -63,6 +63,31 @@ describe("Feed", () => {
         expect(res.body).toEqual({ ...mapElMundoDomainToElMundoDTO(notice) });
       });
   });
+  it(`
+  GIVEN i have 1 new on repo
+  WHEN i get by id the feed
+  THEN i get the feed searched
+`, async () => {
+    //GIVEN
+    const noticeRepo = new NoticeMongoRepository();
+    const notice = new Notice(idGenerator.run(), "Title", "url");
+    await noticeRepo.save(notice);
+    //WHEN
+    await request(app)
+      .delete("/feed/" + notice.getId())
+      .expect((res) => {
+        // THEN
+        expect(res.status).toEqual(200);
+      });
+
+    await request(app)
+      .get("/feed/" + notice.getId())
+      .expect((res) => {
+        // THEN
+        expect(res.status).toEqual(200);
+        expect(res.body).toEqual({});
+      });
+  });
 });
 
 const idGenerator = new IdGeneratorMongoose();

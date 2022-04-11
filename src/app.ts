@@ -14,6 +14,7 @@ import { Notice } from "./domain/Notice";
 import { mapElMundoDomainToElMundoDTO } from "./map/mapElMundoDomainToElMundoDTO";
 import http from "http";
 import { GetFeedById } from "./actions/GetFeedById";
+import { DeleteFeed } from "./actions/DeleteFeed";
 
 // Create Express server
 export const app = express();
@@ -40,7 +41,12 @@ app.get("/feed/:id", async (req: Request, res: Response) => {
   const feed: Notice | null = await action.run(req.params.id);
   return res.status(200).send(feed ? mapElMundoDomainToElMundoDTO(feed) : {});
 });
-
+app.delete("/feed/:id", async (req: Request, res: Response) => {
+  const repo = new NoticeMongoRepository();
+  const action = new DeleteFeed(repo);
+  await action.run(req.params.id);
+  return res.status(200).send({});
+});
 // Express configuration
 app.get("/", (req: Request, res: Response) => {
   return res.status(200).send({ msg: "Hello world" });
