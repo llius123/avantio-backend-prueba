@@ -104,4 +104,4 @@ En el caso de que se use jira o cualquier otro software los commits quedarian ta
 
 ## Disclaimer
 
-El proyecto no esta perfecto, hya muchas mejoras que estan anotadas en el archivo `TODO`
+El proyecto no esta perfecto, hay muchas mejoras que estan anotadas en el archivo `TODO`
