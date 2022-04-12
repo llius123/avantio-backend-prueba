@@ -1,13 +1,10 @@
 import express from "express";
 import { Request, Response } from "express";
 import "reflect-metadata";
-import { ElMundoScrapper } from "./actions/ElMundoScrapper";
 import { NoticeMongoRepository } from "./repository/NoticeMongoRepository";
-import { ScraperRequestPromise } from "./utils/ScraperRequestPromise";
 import { connection } from "./repository/MongoDBConnection";
 import { IdGeneratorMongoose } from "./utils/IdGeneratorMongoose";
-import { ScraperRequestPromiseV2 } from "./utils/ScraperRequestPromiseV2";
-import { ElPaisScrapper } from "./actions/ElPaisScrapper";
+import { ScraperRequestPromise } from "./utils/ScraperRequestPromise";
 import { UpdateFeedService } from "./actions/UpdateFeedService";
 import { GetFeed } from "./actions/GetFeed";
 import { Notice } from "./domain/Notice";
@@ -26,7 +23,7 @@ app.use(express.json());
 
 app.get("/updateFeed", async (req: Request, res: Response) => {
   const repo = new NoticeMongoRepository();
-  const scraper = new ScraperRequestPromiseV2();
+  const scraper = new ScraperRequestPromise();
   const idGenerator = new IdGeneratorMongoose();
   const action = new UpdateFeedService(repo, scraper, idGenerator);
   await action.run();

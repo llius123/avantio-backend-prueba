@@ -3,7 +3,7 @@ import { NoticeMongoRepository } from "../repository/NoticeMongoRepository";
 import mongoose from "mongoose";
 import { Scraper } from "../utils/Scraper";
 import { IdGenerator } from "../utils/IdGenerator";
-import { ScrapedData } from "../utils/ScraperRequestPromiseV2";
+import { ScrapedData } from "../utils/ScraperRequestPromise";
 
 export class ElPaisScrapper {
   private repo: NoticeMongoRepository;
