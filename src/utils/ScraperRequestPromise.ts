@@ -11,8 +11,6 @@ export class ScraperRequestPromise implements Scraper {
   constructor() {}
 
   async run(url: string, htmlTagToScrap: string, encoding: "utf8" | "latin1") {
-    console.log(url, encoding);
-
     const all: any = await rp({ url: url, encoding: encoding })
       .then(function (html) {
         const a = $.load(html);
