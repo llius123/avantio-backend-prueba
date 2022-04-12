@@ -14,3 +14,10 @@ Pues mongodb no, asi que el parametro host hay que poner mongodb.
 ### En resumen, no usar typeorm con mongo
 
 Me ha dado muchisimos problemas, mejor usar un ODM que ya este preparado para mongo y no un ORM.
+
+# Scraping
+
+## Codificacion a la hora de hacer scraping
+
+Esto es interesante porque la codificacion para scrapear cada periodico es distinto.
+Para el mundo la codificacion tiene que ser latin1 y para el pais tiene que ser utf8, sino los accentos no aparecen.

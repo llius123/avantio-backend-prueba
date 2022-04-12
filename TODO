@@ -38,11 +38,10 @@ TODO:
         ✔ 1-Get Feed @done(22-04-11 19:37)
             ✔ 1-Hacer test unit, infra, e2e @done(22-04-11 19:37)
         ✔ 2-Get feed by id @done(22-04-11 20:05)
-        Esto tiene que devolver las 5 noticias de portada de ElPais y de ElMundo
+        Regla de neocio: Esto tiene que devolver las 5 noticias de portada de ElPais y de ElMundo
         ✔ 3-Delete feed @done(22-04-11 20:28)
         ✔ 4-Create feed @done(22-04-11 21:58)
         ✔ 5-Update feed @done(22-04-11 22:27)
-    ☐ Poder añadir a mano noticias a traves de la api
 
 Deuda tecnica:
     ☐ Refactorizar test e2e porque estan muy "sucios"
@@ -54,3 +53,4 @@ Deuda tecnica:
     ☐ Intentar quitar los any de las acciones de ElMundo
     ☐ Revisar ElMundoMongoDB a ver si tiene sentido que sea una clase
     ☐ Revisar porque el formateo de lineas no funciona en los tests
+    ☐ Extraer los endpoints de app.ts a un archivo mejor
