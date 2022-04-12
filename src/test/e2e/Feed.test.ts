@@ -3,7 +3,7 @@ import { NoticeMongoRepository } from "../../repository/NoticeMongoRepository";
 import { IdGeneratorMongoose } from "../../utils/IdGeneratorMongoose";
 import request from "supertest";
 import { app, server } from "../../app";
-import { mapElMundoDomainToElMundoDTO } from "../../map/mapElMundoDomainToElMundoDTO";
+import { mapNoticeToElNoticeDTO } from "../../map/mapNoticeToElNoticeDTO";
 import mongoose from "mongoose";
 import { connection } from "../../repository/MongoDBConnection";
 
@@ -39,8 +39,8 @@ describe("Feed", () => {
         // THEN
         expect(res.status).toEqual(200);
         expect(res.body).toEqual([
-          ...a.map(mapElMundoDomainToElMundoDTO),
-          ...b.map(mapElMundoDomainToElMundoDTO),
+          ...a.map(mapNoticeToElNoticeDTO),
+          ...b.map(mapNoticeToElNoticeDTO),
         ]);
       });
   });
@@ -60,7 +60,7 @@ describe("Feed", () => {
       .expect((res) => {
         // THEN
         expect(res.status).toEqual(200);
-        expect(res.body).toEqual({ ...mapElMundoDomainToElMundoDTO(notice) });
+        expect(res.body).toEqual({ ...mapNoticeToElNoticeDTO(notice) });
       });
   });
   it(`
@@ -101,7 +101,7 @@ describe("Feed", () => {
     await request(app)
       .post("/feed")
       .send({
-        ...mapElMundoDomainToElMundoDTO(notice),
+        ...mapNoticeToElNoticeDTO(notice),
       })
       .expect((res) => {
         // THEN
@@ -112,7 +112,7 @@ describe("Feed", () => {
       .expect((res) => {
         // THEN
         expect(res.status).toEqual(200);
-        expect(res.body).toEqual({ ...mapElMundoDomainToElMundoDTO(notice) });
+        expect(res.body).toEqual({ ...mapNoticeToElNoticeDTO(notice) });
       });
   });
   it(`
@@ -130,7 +130,7 @@ describe("Feed", () => {
     await request(app)
       .post("/feed")
       .send({
-        ...mapElMundoDomainToElMundoDTO(notice),
+        ...mapNoticeToElNoticeDTO(notice),
       })
       .expect((res) => {
         // THEN
@@ -139,7 +139,7 @@ describe("Feed", () => {
     await request(app)
       .put("/feed")
       .send({
-        ...mapElMundoDomainToElMundoDTO(notice2),
+        ...mapNoticeToElNoticeDTO(notice2),
       })
       .expect((res) => {
         // THEN
@@ -150,7 +150,7 @@ describe("Feed", () => {
       .expect((res) => {
         // THEN
         expect(res.status).toEqual(200);
-        expect(res.body).toEqual({ ...mapElMundoDomainToElMundoDTO(notice2) });
+        expect(res.body).toEqual({ ...mapNoticeToElNoticeDTO(notice2) });
       });
   });
 });

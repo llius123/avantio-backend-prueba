@@ -1,9 +1,9 @@
 import { Filter, NoticeRepository } from "./NoticeRepository";
 import { Notice } from "../domain/Notice";
 import { noticeMongoSchema } from "./MongoDBConnection";
-import { mapElMundoDTOToElMundoDomain } from "../map/mapElMundoDTOToElMundoDomain";
+import { mapNoticeDTOToNotice } from "../map/mapNoticeDTOToNotice";
 import { NoticeDTO } from "../dto/NoticeDTO";
-import { mapElMundoDomainToElMundoDTO } from "../map/mapElMundoDomainToElMundoDTO";
+import { mapNoticeToElNoticeDTO } from "../map/mapNoticeToElNoticeDTO";
 
 export class NoticeMongoRepository implements NoticeRepository {
   constructor() {}
@@ -19,7 +19,7 @@ export class NoticeMongoRepository implements NoticeRepository {
   async getAll(): Promise<Notice[]> {
     const notices = await noticeMongoSchema.find().exec();
 
-    return notices.map(mapElMundoDTOToElMundoDomain);
+    return notices.map(mapNoticeDTOToNotice);
   }
 
   async findOneBy(filter: Filter): Promise<Notice | null> {
@@ -49,8 +49,8 @@ export class NoticeMongoRepository implements NoticeRepository {
       .limit(5);
 
     return noticesElMundoFromRepo
-      .map(mapElMundoDTOToElMundoDomain)
-      .concat(noticesElPaisFromRepo.map(mapElMundoDTOToElMundoDomain));
+      .map(mapNoticeDTOToNotice)
+      .concat(noticesElPaisFromRepo.map(mapNoticeDTOToNotice));
   }
 
   async getById(id: string): Promise<Notice | null> {

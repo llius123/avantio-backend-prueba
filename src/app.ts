@@ -8,7 +8,7 @@ import { ScraperRequestPromise } from "./utils/ScraperRequestPromise";
 import { UpdateFeedService } from "./actions/UpdateFeedService";
 import { GetFeed } from "./actions/GetFeed";
 import { Notice } from "./domain/Notice";
-import { mapElMundoDomainToElMundoDTO } from "./map/mapElMundoDomainToElMundoDTO";
+import { mapNoticeToElNoticeDTO } from "./map/mapNoticeToElNoticeDTO";
 import http from "http";
 import { GetFeedById } from "./actions/GetFeedById";
 import { DeleteFeed } from "./actions/DeleteFeed";
@@ -34,13 +34,13 @@ app.get("/feed", async (req: Request, res: Response) => {
   const repo = new NoticeMongoRepository();
   const action = new GetFeed(repo);
   const feed: Notice[] = await action.run();
-  return res.status(200).send(feed.map(mapElMundoDomainToElMundoDTO));
+  return res.status(200).send(feed.map(mapNoticeToElNoticeDTO));
 });
 app.get("/feed/:id", async (req: Request, res: Response) => {
   const repo = new NoticeMongoRepository();
   const action = new GetFeedById(repo);
   const feed: Notice | null = await action.run(req.params.id);
-  return res.status(200).send(feed ? mapElMundoDomainToElMundoDTO(feed) : {});
+  return res.status(200).send(feed ? mapNoticeToElNoticeDTO(feed) : {});
 });
 app.delete("/feed/:id", async (req: Request, res: Response) => {
   const repo = new NoticeMongoRepository();
